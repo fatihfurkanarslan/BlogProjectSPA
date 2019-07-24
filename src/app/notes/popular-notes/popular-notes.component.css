@@ -1,0 +1,19 @@
+.card-title {
+  font-size: 90%;
+}
+
+.left {
+  text-align: left;
+  font-size: 14px;
+  color: #404040;
+}
+.right {
+  text-align: right;
+  font-size: 14px;
+  color: #AAAAAA;
+}
+
+.card {
+  border-color: white;
+  margin-bottom: 15px;
+}

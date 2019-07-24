@@ -1,0 +1,12 @@
+ul
+{
+text-align: center;
+background-color: white;
+}
+
+ul li
+{
+  display: inline;
+  margin-right: 5%;
+  font-size: 13px;
+}

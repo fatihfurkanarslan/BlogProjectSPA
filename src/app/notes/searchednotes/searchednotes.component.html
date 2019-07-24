@@ -1,0 +1,40 @@
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let tag of tagList" [routerLink]="['/note', tag.note.id]" routerLinkActive="active">
+
+    <div class="row">
+      <div class="col-8">
+         <div class="card-body">
+        <h5 id="title"  class="card-title">{{tag.note?.title}}</h5>
+        <p class="card-text" id="content">{{tag.note?.description}}</p>
+      </div>
+      </div>
+      <div class="col-4">
+        <!-- <img class="card-img-top img-thumbnail" src="{{tag.note?.photos[0]?.photoUrl}}" alt="{{tag.note?.title}}"> -->
+     </div>
+    </div>
+
+  </mat-grid-tile>
+
+</mat-grid-list>
+
+
+<!-- <div *ngFor="let tag of tagList">
+<div class="card" style="border: 0">
+  <div class="row">
+  <div class="col-12">
+     <div class="card-body">
+    <h5 href="#"  id="title"  class="card-title">{{tag.note.title}}</h5>
+    <p class="card-text" id="content">{{tag.note.description}}</p>
+    <div class="d-flex">
+        <span class="left">
+          {{tag.note.onModifiedUsername}}
+        </span>
+        <span class="right ml-auto">{{tag.note.onModified | date:'mediumDate'}}</span>
+    </div>
+
+  </div>
+  </div>
+
+</div>
+</div>
+</div> -->

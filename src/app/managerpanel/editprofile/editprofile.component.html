@@ -1,0 +1,28 @@
+
+<mat-card class="example-card">
+    <span class="center">Edit Profile</span>
+  <mat-form-field class="example-full-width">
+    <input matInput class="form-control" placeholder="Username"  name="username" [(ngModel)]="user.username">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+      <input matInput class="form-control" placeholder="firstname"  name="firstname" [(ngModel)]="user.firstname">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput class="form-control" placeholder="lastname"  name="lastname" [(ngModel)]="user.lastname">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput class="form-control" placeholder="description"  name="description" [(ngModel)]="user.description">
+      </mat-form-field>
+<br>
+  <button class="button" mat-raised-button (click)="fileInput.click()">
+    <i class="material-icons">add</i>
+    <span>Select A Photo</span>
+    <input #fileInput type="file" (change)="onFileSelected($event)" style="display:none;" />
+  </button>
+
+  <mat-card-actions>
+    <button mat-button style="margin-left: 40%" (click)="updateProfile()">Save Changes</button>
+  </mat-card-actions>
+</mat-card>
+

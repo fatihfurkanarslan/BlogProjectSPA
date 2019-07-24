@@ -1,0 +1,60 @@
+
+ <mat-card class="image">
+    <mat-card-title>Register</mat-card-title>
+<mat-card-content>
+<form [formGroup]="form" (ngSubmit)="register()">
+  <p>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Username" formControlName="username" [(ngModel)]="model.username" name="username" required>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Email" formControlName="username"
+       required [(ngModel)]="model.email" name="email">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field>
+      <input type="password" matInput placeholder="Password" formControlName="password" [(ngModel)]="model.password" name="password" required>
+    </mat-form-field>
+  </p>
+
+  <div class="button">
+      <button type="button" mat-button [routerLink]="['/home']" routerLinkActive="active">Cancel</button>
+    <button type="submit" mat-button>Register</button>
+  </div>
+
+</form>
+</mat-card-content>
+</mat-card>
+
+<!-- <form #registerForm="ngForm" (ngSubmit)="register()">
+  <div>
+    <h2 class="text-center">Become a Member</h2>
+    <hr>
+  </div>
+
+  <div class="form-group">
+      <input type="text" class="form-control" placeholder="Email" name="email" [(ngModel)]="model.email">
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Username" name="username" [(ngModel)]="model.username">
+    </div>
+
+    <div class="form-group">
+      <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="model.password">
+    </div>
+
+    <div class="form-group text-center">
+      <button class="btn btn-success" type="submit">Register</button>
+      <button class="btn btn-default" type="button" [routerLink]="['/home']" routerLinkActive="active">Cancel</button>
+    </div>
+
+</form> -->
+
+
+

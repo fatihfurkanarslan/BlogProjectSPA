@@ -1,0 +1,6 @@
+
+<ul class="categoryList">
+  <li *ngFor="let category of categories" [routerLink]="['/notes', category.id]" routerLinkActive="active">
+    {{category.name | uppercase}}
+  </li>
+</ul>

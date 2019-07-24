@@ -1,0 +1,12 @@
+.example-full-width {
+  width: 100%;
+}
+
+.example-card {
+  max-width: 50%;
+  margin-left: 25%;
+}
+
+.center {
+  margin-left: 45%;
+}

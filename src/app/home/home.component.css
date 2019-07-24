@@ -1,0 +1,20 @@
+ul {
+
+  list-style-type: none;
+
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.popularonblog {
+
+  font-size: 99%;
+  font-weight: bold;
+
+}
+
+hr {
+  font-weight: bold;
+}

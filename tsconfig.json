@@ -17,6 +17,12 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    // added after devextreme
+    "paths": {
+      "jszip": [
+        "node_modules/jszip/dist/jszip.min.js"
+      ]
+    }
   }
 }

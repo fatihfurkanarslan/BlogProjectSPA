@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/font-awesome/css/font-awesome.min.css';
+@import '../node_modules/font-awesome/css/font-awesome.min.css';
+@import '../node_modules/@ngx-share/button/themes/default/default-theme.css';
+
+
+
+div{
+  font-family: 'Libre Baskerville', serif;
+  }
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.imageback {
+  background-image: url('https://cdn.photographypro.com/wp-content/uploads/2018/01/black-and-white-photography-city-fog@2x-1.jpg');
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

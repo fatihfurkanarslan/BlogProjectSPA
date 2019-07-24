@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand" id="brand" [routerLink]="['/home']"  routerLinkActive="active">ARTICLESORIGIN</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <!-- <ul class="navbar-nav mr-auto">
+
+      <li  *ngIf="loggedIn()" class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Manager Panel
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/createnote']" routerLinkActive="active">Add Note</a>
+              <a class="dropdown-item" [routerLink]="['/usernotes']" routerLinkActive="active">My Notes</a>
+
+
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" [routerLink]="['/createcategory']" routerLinkActive="active">Add Category</a>
+              <a class="dropdown-item" [routerLink]="['/allcategories']" routerLinkActive="active"> Categories</a>
+          </div>
+      </li>
+
+    </ul> -->
+     <mat-search-bar class="searchbar" (onEnter)="searchNote()" [(ngModel)]="searchToTag"></mat-search-bar>
+    <!-- mr and mlauto is used for fixing one to left or right-->
+    <div *ngIf="loggedIn()" class="dropdown ml-auto">
+      <a class="dropdown-toggle" id="dropdownMenu" data-toggle="dropdown">
+       <!-- Welcome {{authService.decodedToken?.unique_name}} -->
+       <img *ngIf="user" class="circular" src="{{photoUrl}}" alt="img">
+
+      </a>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="active">Profile</a>
+        <div *ngIf="isactive" class="dropdown-divider"></div>
+
+        <a *ngIf="isactive" class="dropdown-item" [routerLink]="['/createnote']" routerLinkActive="active">Add Note</a>
+        <a *ngIf="isactive" class="dropdown-item" [routerLink]="['/usernotes']" routerLinkActive="active">My Notes</a>
+        <!-- beğenileri gösterecek page -->
+        <!-- <a class="dropdown-item" href="#">My Likes</a> -->
+        <div *ngIf="isactive" class="dropdown-divider"></div>
+        <a *ngIf="isactive" class="dropdown-item" [routerLink]="['/createcategory']" routerLinkActive="active">Add Category</a>
+        <a *ngIf="isactive" class="dropdown-item" [routerLink]="['/allcategories']" routerLinkActive="active"> Categories</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="loggedOut()">Logout</a>
+      </div>
+    </div>
+    <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline ml-auto">
+      <!-- <input class="form-control mr-sm-2" type="text" placeholder="Email" required [(ngModel)]="model.username" name="username">
+      <input class="form-control mr-sm-2" type="password" placeholder="Password" required [(ngModel)]="model.password" name="password"> -->
+      <button [disabled]="!loginForm.valid" mat-stroked-button type="submit" [routerLink]="['/login']" routerLinkActive="active">Login</button>
+    </form>
+  </div>
+</nav>
+

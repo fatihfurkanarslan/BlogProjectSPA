@@ -1,0 +1,38 @@
+
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let note of notes" [routerLink]="['/note', note.id]" routerLinkActive="active">
+
+    <div class="row">
+      <div class="col-8">
+         <div class="card-body">
+        <h5 id="title"  class="card-title">{{note?.title}}</h5>
+        <p class="card-text" id="content">{{note?.description}}</p>
+      </div>
+      </div>
+      <div class="col-4">
+        <img class="card-img-top img-thumbnail" src="{{note.photos[0]?.photoUrl}}" alt="{{note?.title}}">
+     </div>
+    </div>
+
+  </mat-grid-tile>
+
+</mat-grid-list>
+
+<!-- <div class="card"  *ngFor="let note of notes" [routerLink]="['/note', note.id]" routerLinkActive="active">
+  <div class="row">
+  <div class="col-8">
+     <div class="card-body">
+    <h5 id="title"  class="card-title">{{note.title}}</h5>
+    <p class="card-text" id="content">{{note.description}}</p>
+
+  </div>
+  </div>
+</div>
+</div> -->
+
+
+<!-- <ul style="text-align: center">
+  <li *ngFor="let note of notes" [routerLink]="['/note', note.id]" routerLinkActive="active">
+    <app-popular-notes [note]="note"></app-popular-notes>
+  </li>
+</ul> -->

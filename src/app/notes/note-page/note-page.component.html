@@ -1,0 +1,66 @@
+
+
+<div class="note">
+
+<div class="row">
+  <div class="fr-view" [innerHTML]="htmlCode"></div>
+  <br>
+</div>
+<div class="parent-element">
+<button mat-fab style="background-color: white" (click)="increaseLike()">
+    <mat-icon style="color:#1F4E5F">favorite</mat-icon>
+  </button>
+  <mat-label style="margin-left: 20px"> {{note?.likes?.length}} glories</mat-label>
+  <mat-label class="tag">
+      <button class="tagbutton" aria-label="Show an example snack-bar" (click)="searchNotes(tag.tags)"  *ngFor="let tag of tags" mat-stroked-button color="primary">{{tag.tags}}  </button> </mat-label>
+</div>
+
+<share-buttons class="sharebuttons" [theme]="'modern-dark'"
+ [include]="['facebook','twitter','linkedin','google','pinterest','reddit','tumblr','whatsapp']"
+ [show]="3"
+ [url]="'http://www.google.com'"
+ [autoSetMeta]="false"
+></share-buttons>
+<br>
+<br>
+<br>
+  <span *ngFor="let comment of note?.comments">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{ authService.decodedToken?.unique_name }}</mat-card-title>
+        <mat-card-subtitle>{{ comment.onCreated | date:'mediumDate' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          {{comment.text}}
+        </p>
+      </mat-card-content>
+    </mat-card>
+    <br>
+  </span>
+
+  <!-- <app-notecomments [note]="note"></app-notecomments> -->
+<div *ngIf="token" class="commentform">
+    <form [formGroup]="form" (ngSubmit)="makeComment()">
+
+    <mat-form-field class="example-full-width">
+        <input matInput formControlName="Text" required placeholder="Write A Response"  name="text" [(ngModel)]="commentModel.text" >
+    </mat-form-field>
+
+    <br>
+   <button aria-label="Show an example snack-bar" mat-raised-button>Publish </button>
+
+  </form>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+

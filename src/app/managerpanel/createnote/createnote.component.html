@@ -1,0 +1,47 @@
+<form #editForm="ngForm" id="editForm" class="example-container" (ngSubmit)="onSubmit()">
+
+  <div class="form-group">
+    <!-- <label for="favoriteValue">Choose The Category</label>
+    <select class="form-control" id="favoriteValue"  name="selectedOption" [(ngModel)]="selectedOption">
+
+      <option *ngFor="let cat of categories" [ngValue]="cat.id">{{cat.name}}</option>
+    </select> -->
+    <mat-form-field style="width: 100%">
+      <mat-label>Choose The Category</mat-label>
+      <mat-select style="width: 100%" [(value)]="selectedOption">
+        <mat-option *ngFor="let cat of categories" [value]="cat.id">
+          {{cat.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+  <mat-form-field class="example-full-width">
+      <input matInput class="form-control" placeholder="Title"  name="title" [(ngModel)]="noteToInsert.title">
+    </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+      <input matInput class="form-control" placeholder="Description"  name="description" [(ngModel)]="noteToInsert.description">
+    </mat-form-field>
+
+  <div name="text" [(ngModel)]="noteToInsert.text" (keyup)="keyup($event)" [froalaEditor]="options">Hello, Froala!</div>
+
+  <br>
+
+  <!-- <tag-input [(ngModel)]='tagList' name="tagList" [modelAsStrings]="true" [maxItems]='5'></tag-input>
+  <br> -->
+
+<div class="row">
+    &nbsp;&nbsp;&nbsp;
+    <button (ngSubmit)="onSubmit()"  (click)="openSnackBar()" aria-label="Show an example snack-bar" mat-raised-button>Post </button>
+    <button type="button" style="margin-left: 5%" (click)="SaveDraft()" mat-raised-button>Draft </button>
+
+</div>
+
+</form>
+
+
+
+
+

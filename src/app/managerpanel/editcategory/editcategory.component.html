@@ -1,0 +1,28 @@
+
+
+<form #editForm="ngForm" id="editForm" class="example-container" (ngSubmit)="onSubmit()">
+
+    <mat-form-field class="example-full-width">
+        <input matInput class="form-control" placeholder="Title"  name="name" [(ngModel)]="category.name" >
+      </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput class="form-control" placeholder="Description"  name="description" [(ngModel)]="category.description">
+      </mat-form-field>
+
+
+    <!-- <mat-form-field>
+    <input matInput type="file" (change)="onFileSelected($event)"/>
+  </mat-form-field> -->
+
+  <button class="button" mat-raised-button (click)="fileInput.click()">
+      <i class="material-icons">add</i>
+      <span>Select A Photo</span>
+      <input #fileInput type="file" (change)="onFileSelected($event)" style="display:none;" />
+    </button>
+    <br>
+    <br>
+    <button type="submit" class="button" mat-raised-button >Post </button>
+
+
+  </form>

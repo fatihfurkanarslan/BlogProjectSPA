@@ -1,0 +1,52 @@
+
+ <mat-card class="image">
+    <mat-card-title>Login</mat-card-title>
+
+     <p>
+        <span style="color:#d21f3c" matBadge="4" matBadgeOverlap="false" *ngIf="error">{{error}}</span>
+      </p>
+    <br>
+<mat-card-content>
+<form [formGroup]="form" (ngSubmit)="login()">
+  <p>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Username" formControlName="username"
+       required [(ngModel)]="model.username" name="username">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field>
+      <input type="password" matInput placeholder="Password" formControlName="password"
+       required [(ngModel)]="model.password" name="password">
+    </mat-form-field>
+  </p>
+
+  <div class="button">
+      <button  mat-raised-button type="submit" (click)="isViewable = false" [routerLink]="['/register']" routerLinkActive="active">Register</button>
+    <button type="submit" mat-button>Login</button>
+  </div>
+
+</form>
+</mat-card-content>
+</mat-card>
+<!-- <form #registerForm="ngForm" (ngSubmit)="login()">
+    <div>
+      <h2 class="text-center">Login</h2>
+      <hr>
+    </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Username" name="username" [(ngModel)]="model.username">
+      </div>
+
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="model.password">
+      </div>
+
+      <div class="form-group text-center">
+        <button class="btn btn-success" type="submit">Login</button>
+        <button class="btn btn-default" type="button" [routerLink]="['/home']" routerLinkActive="active">Cancel</button>
+      </div>
+
+  </form> -->
