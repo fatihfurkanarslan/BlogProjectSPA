@@ -1,36 +1,42 @@
 
-div {
+ div {
   border-color: white;
-  text-align: center;
+  text-align: left;
+  cursor: pointer;
 }
 
 img {
 object-fit: cover;
 object-position: center;
-height: 170px;
-width: 170px;
+height: auto;
+width: 95%;
 border: 0;
 }
 
-#content {
+.aaa:hover {
+  opacity: 0.8;
+}
+
+
+/* #content {
   color: #AAAAAA;
   font-size: 14px;
-}
+} */
 
-#title {
+/* #title {
   color: 333745;
   font-size: 16px;
-}
+} */
 
-.right {
+/* .right {
   text-align: right;
   font-size: 14px;
   color: #AAAAAA;
-}
+} */
 
 
-.left {
+/* .left {
   text-align: left;
   font-size: 14px;
   color: #404040;
-}
+} */

@@ -24,7 +24,14 @@ export class EditprofileComponent implements OnInit {
   photoUrl: string;
 
   constructor(private profileService: ProfileService, private _snackBar: MatSnackBar,
-     private authService: AuthService, private photoService: PhotoService) { }
+     private authService: AuthService, private photoService: PhotoService) {
+
+      profileService.getChangeInPhoto.subscribe(photoUrl => this.changePhoto(photoUrl));
+      }
+
+      private changePhoto(_photoUrl: string): void {
+        this.photoUrl = _photoUrl;
+    }
 
   ngOnInit() {
 
@@ -80,6 +87,8 @@ export class EditprofileComponent implements OnInit {
       duration: this.durationInSeconds * 1000,
       verticalPosition: 'top'
     });
+
+    this.user.photoUrl = this.photoUrl;
   }
 
   errorPhotoBar() {

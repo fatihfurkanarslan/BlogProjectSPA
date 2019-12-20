@@ -1,7 +1,9 @@
 
 
 <div class="note">
-
+<span style="font-size: 30px"><b>{{note?.title}}</b></span>
+<br>
+<br>
 <div class="row">
   <div class="fr-view" [innerHTML]="htmlCode"></div>
   <br>
@@ -12,7 +14,7 @@
   </button>
   <mat-label style="margin-left: 20px"> {{note?.likes?.length}} glories</mat-label>
   <mat-label class="tag">
-      <button class="tagbutton" aria-label="Show an example snack-bar" (click)="searchNotes(tag.tags)"  *ngFor="let tag of tags" mat-stroked-button color="primary">{{tag.tags}}  </button> </mat-label>
+      <button class="tagbutton" style="margin:5px;" aria-label="Show an example snack-bar" (click)="searchNotes(tag.tags)"  *ngFor="let tag of tags" mat-stroked-button color="primary">{{tag.tags}}  </button> </mat-label>
 </div>
 
 <share-buttons class="sharebuttons" [theme]="'modern-dark'"
@@ -45,7 +47,7 @@
     <form [formGroup]="form" (ngSubmit)="makeComment()">
 
     <mat-form-field class="example-full-width">
-        <input matInput formControlName="Text" required placeholder="Write A Response"  name="text" [(ngModel)]="commentModel.text" >
+        <input matInput formControlName="Text" required placeholder="Write A Comment"  name="text" [(ngModel)]="commentModel.text" >
     </mat-form-field>
 
     <br>

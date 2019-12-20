@@ -1,0 +1,18 @@
+
+ div {
+  border-color: white;
+  text-align: left;
+  cursor: pointer;
+}
+
+img {
+object-fit: cover;
+object-position: center;
+height: auto;
+width: 95%;
+border: 0;
+}
+
+.aaa:hover {
+  opacity: 0.8;
+}

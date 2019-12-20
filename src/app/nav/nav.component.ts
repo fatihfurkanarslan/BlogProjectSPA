@@ -53,14 +53,12 @@ export class NavComponent implements OnInit {
 
   loggedIn() {
     const token = localStorage.getItem('token');
-
     // tslint:disable-next-line:prefer-const
     return !!token;
   }
 
 
   loggedOut() {
-
     localStorage.removeItem('token');
     // this.alertify.success('log out is successfull');
     this.router.navigate(['/home']);

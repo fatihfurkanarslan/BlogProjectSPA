@@ -15,7 +15,8 @@ notes: Note[] = [];
 popularNotes: Note[] = [];
 pageNumber = 1;
 
-  constructor(private noteService: NoteService, private route: ActivatedRoute) { }
+  constructor(private noteService: NoteService, private route: ActivatedRoute) {
+   }
 
   ngOnInit() {
 
@@ -45,7 +46,9 @@ pageNumber = 1;
   onSuccess(result) {
     if (result !== undefined && result.length !== 0) {
       result.forEach(item => {
-        this.notes.push(item);
+        if (item.isDraft === false) {
+          this.notes.push(item);
+        }
       });
     }
   }

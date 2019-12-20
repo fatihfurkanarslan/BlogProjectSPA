@@ -33,8 +33,8 @@ getCategory(categoryId: number): Observable<Category> {
   return this.http.get<Category>(this.apiUrl + 'getcategory/' + categoryId, httpOptions);
 }
 
-insertCategory(categoryToInsert: FormData): Observable<Category> {
-  return this.http.post<Category>(this.apiUrl + 'insert', categoryToInsert, httpOptionsFormData);
+insertCategory(categoryToInsert: FormData): Observable<any> {
+  return this.http.post<any>(this.apiUrl + 'insert', categoryToInsert, httpOptionsFormData);
 }
 
 deleteCategory(categoryId: number): Observable<Category> {

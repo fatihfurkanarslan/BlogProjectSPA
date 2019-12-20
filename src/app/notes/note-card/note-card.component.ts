@@ -10,9 +10,9 @@ export class NoteCardComponent implements OnInit {
 
   @Input() note: Note;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
   }
+
+  ngOnInit() {}
 
 }

@@ -13,12 +13,16 @@ export class ActivateuserComponent implements OnInit, OnDestroy {
 
   user: User;
   private routeSub: Subscription;
+  imgUrl: string;
   constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
       this.authService.activateUser(params['id']).subscribe(result => {this.user = result; });
-      this.router.navigate(['/home']);
+      setTimeout(() => {
+        this.router.navigate(['/home']);
+      }, 2000);
+
     });
 
   }

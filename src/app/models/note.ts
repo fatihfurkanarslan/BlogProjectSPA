@@ -14,6 +14,7 @@ export class Note {
   categoryId: number;
   userId: number;
   isDraft: boolean;
+  mainPhotourl: string;
   photos: string[];
   comments: Comment[];
   tags: string[];

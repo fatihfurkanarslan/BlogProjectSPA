@@ -18,6 +18,8 @@ import { ActivateuserComponent } from './user/activateuser/activateuser.componen
 import { CreatetagsComponent } from './managerpanel/createtags/createtags.component';
 import { SearchednotesComponent } from './notes/searchednotes/searchednotes.component';
 import { NavComponent } from './nav/nav.component';
+import { NotesbyuserComponent } from './notes/notesbyuser/notesbyuser.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 
 export const Routes = [
@@ -38,7 +40,10 @@ export const Routes = [
   { path: 'useractivate/:id', component: ActivateuserComponent },
   { path: 'createtags', component: CreatetagsComponent },
   { path: 'searchednotes', component: SearchednotesComponent },
-  { path: 'nav', component: NavComponent }
+  { path: 'nav', component: NavComponent },
+  { path: 'notesbyuser/:id', component: NotesbyuserComponent },
+  { path: 'categories', component: CategoriesComponent },
+  { path: '**', component: HomeComponent }
 
 
 ];

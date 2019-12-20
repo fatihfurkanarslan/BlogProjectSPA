@@ -9,12 +9,12 @@ import { CategoryService } from './../services/category.service';
 })
 export class CategoryComponent implements OnInit {
 
-  categories: Category[];
+  categories: Category[] = [];
 
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
-    this.categoryService.getCategories().subscribe((categoryList: Category[]) => {this.categories = categoryList; },
+    this.categoryService.getCategories().subscribe((categoryList) => {this.categories = categoryList; },
     error => {
       console.log('category service failed');
 

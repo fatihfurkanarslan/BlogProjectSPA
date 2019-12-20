@@ -39,7 +39,7 @@ login(model: any) {
       if (user) {
 
         localStorage.setItem('token', user.token);
-        localStorage.setItem('user', JSON.stringify(user.user));
+        // localStorage.setItem('user', JSON.stringify(user.user));
         localStorage.setItem('user', JSON.stringify(user.id));
         this.decodedToken = this.jwtHelper.decodeToken(user.token);
         // this.fireIsLoggedIn.emit(user);

@@ -109,7 +109,6 @@ export class EditnoteComponent implements OnInit {
   }
 
   SaveDraft() {
-    console.log('deneme');
     const images = $('img').map(function() {
       return $(this).attr('src').toString();
    });

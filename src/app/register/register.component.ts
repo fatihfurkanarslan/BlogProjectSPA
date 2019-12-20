@@ -15,8 +15,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
   });
 
   model: any = {};
+  successMessage: string;
+  errorMessage: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+   }
 
   ngOnInit() {
     document.body.classList.add('imageback');
@@ -28,8 +31,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   register() {
 
-    this.authService.register(this.model).subscribe(() => {
-      console.log('registration is successfull');
+    this.authService.register(this.model).subscribe(result => {
+      if (result != null){
+        this.successMessage = 'Registration is successfull.<br/> Please check your email box to activate your account.';
+
+      }else {
+        this.errorMessage = 'Username or email is already taken.<br/> Please try another one.';
+      }
     }, error => {console.log(error);
     });
 

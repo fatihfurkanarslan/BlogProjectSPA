@@ -33,6 +33,7 @@ export class NotePageComponent implements OnInit {
 
   comments: Comment[];
   likes: Like[];
+  likeCount = 0;
 
   commentToInsert: Comment;
 
@@ -44,12 +45,10 @@ export class NotePageComponent implements OnInit {
   constructor(private route: ActivatedRoute, private noteService: NoteService,
      private commentService: CommentService, public authService: AuthService,
    private router: Router, private tagService: TagService, private likeService: LikeService, private domSanitizer: DomSanitizer) {
-     this.token = null;
+      this.token = null;
     }
 
   ngOnInit() {
-
-      this.userId = this.authService.decodedToken.nameid;
 
       this.token = localStorage.getItem('token');
 
@@ -82,6 +81,7 @@ console.log('tag service failed ');
 
 
   makeComment() {
+    this.userId = this.authService.decodedToken.nameid;
 
     this.commentModel.userId = this.userId;
     this.commentModel.noteId = this.note.id;
@@ -100,11 +100,17 @@ console.log('tag service failed ');
   }
 
   increaseLike() {
-    this.likeModel.userId = this.userId;
-    this.likeModel.noteId = this.note.id;
+    if (this.likeCount < 10){
+      this.likeModel.userId = this.userId;
+      this.likeModel.noteId = this.note.id;
 
-    this.likeService.insertLike(this.likeModel).subscribe(result => {});
-    this.note.likes.push(new Like());
+      this.likeService.insertLike(this.likeModel).subscribe(result => {});
+      this.note.likes.push(new Like());
+      this.likeCount++;
+    }else {
+      console.log('limit of like button');
+    }
+
   }
 
 

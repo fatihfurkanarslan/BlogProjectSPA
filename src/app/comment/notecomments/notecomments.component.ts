@@ -29,7 +29,7 @@ export class NotecommentsComponent implements OnInit {
     console.log('name :' + name);
   }
 
-  makeComment() {
+  onSubmit() {
 
     this.model.userId = this.id;
     this.model.noteId = this.note.id;

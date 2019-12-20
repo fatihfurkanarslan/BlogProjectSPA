@@ -30,6 +30,8 @@ import { ProfileComponent } from './managerpanel/profile/profile.component';
 import { EditprofileComponent } from './managerpanel/editprofile/editprofile.component';
 import { ActivateuserComponent } from './user/activateuser/activateuser.component';
 import { SearchednotesComponent } from './notes/searchednotes/searchednotes.component';
+import { NotesbyuserComponent } from './notes/notesbyuser/notesbyuser.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 
 // hammerjs
@@ -70,6 +72,13 @@ import { DxButtonModule, DxFormModule } from 'devextreme-angular';
 
 import { ShareButtonsModule } from '@ngx-share/buttons';
 
+// md bootstrap
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
+// flex-layout
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+
 
 // services
 import { AuthService } from '../app/services/auth.service';
@@ -92,6 +101,8 @@ import { CommentService } from './services/comment.service';
 import { PhotoService } from './services/photo.service';
 import { LikeService } from './services/like.service';
 import { ErrorphotobarComponent } from './errorphotobar/errorphotobar.component';
+
+
 
 
 @NgModule({
@@ -122,7 +133,10 @@ import { ErrorphotobarComponent } from './errorphotobar/errorphotobar.component'
       CreatetagsComponent,
       SearchednotesComponent,
       PhotobarComponent,
-      ErrorphotobarComponent
+      ErrorphotobarComponent,
+      NotesbyuserComponent,
+      CategoriesComponent,
+      CategoriesComponent
    ],
    imports: [
       BrowserModule,
@@ -161,7 +175,9 @@ import { ErrorphotobarComponent } from './errorphotobar/errorphotobar.component'
       MatChipsModule,
       MatAutocompleteModule,
       TagInputModule,
-      ShareButtonsModule
+      ShareButtonsModule,
+      MDBBootstrapModule.forRoot(),
+      FlexLayoutModule
    ],
    providers: [
       AuthService,

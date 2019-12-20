@@ -11,18 +11,18 @@
       <mat-label>Choose The Category</mat-label>
       <mat-select style="width: 100%" [(value)]="selectedOption">
         <mat-option *ngFor="let cat of categories" [value]="cat.id">
-          {{cat.name}}
+          {{cat.categoryname}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
 
   <mat-form-field class="example-full-width">
-    <input matInput class="form-control" placeholder="Title"  name="title" [(ngModel)]="note.title">
+    <input matInput class="form-control" required placeholder="Title" maxlength=100  name="title" [(ngModel)]="note.title">
   </mat-form-field>
 
 <mat-form-field class="example-full-width">
-    <input matInput class="form-control" placeholder="Description"  name="description" [(ngModel)]="note.description">
+    <input matInput class="form-control" required placeholder="Description" maxlength=150  name="description" [(ngModel)]="note.description">
   </mat-form-field>
 
   <div name="text" [(ngModel)]="note.text" [froalaEditor]="options"></div>

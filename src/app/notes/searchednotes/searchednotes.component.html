@@ -1,21 +1,45 @@
-<mat-grid-list cols="2" rowHeight="2:1">
-  <mat-grid-tile *ngFor="let tag of tagList" [routerLink]="['/note', tag.note.id]" routerLinkActive="active">
+<div *ngFor="let tag of tagList" class="row" style="padding-bottom: 10px">
+  <br>
+  <br>
+  <!-- Grid column -->
+  <div class="col-lg-3">
 
-    <div class="row">
-      <div class="col-8">
-         <div class="card-body">
-        <h5 id="title"  class="card-title">{{tag.note?.title}}</h5>
-        <p class="card-text" id="content">{{tag.note?.description}}</p>
-      </div>
-      </div>
-      <div class="col-4">
-        <!-- <img class="card-img-top img-thumbnail" src="{{tag.note?.photos[0]?.photoUrl}}" alt="{{tag.note?.title}}"> -->
+    <!-- Featured image -->
+      <img class="aaa" src="{{tag.note.mainPhotourl}}" alt="{{tag.note?.title}}"
+        [routerLink]="['/note', tag.note.id]" routerLinkActive="active">
+      <a>
+        <div class="mask rgba-white-slight"></div>
+      </a>
+  </div>
+  <!-- Grid column -->
+  
+  <!-- Grid column -->
+  <div class="col-lg-9">
+    <br>
+    <!-- Category -->
+    <!-- <a href="#!" class="green-text">
+      <h6 class="font-weight-bold mb-3"><mdb-icon fas icon="utensils" class="pr-2"></mdb-icon></h6>
+    </a> -->
+    <!-- Post title -->
+    <h6 class="font-weight-bold mb-3"  [routerLink]="['/note', tag.note.id]" routerLinkActive="active"><strong>{{tag.note.title}}</strong></h6>
+    <!-- font size is minimal -->
+    <div style="font-size: 13px;">
+       <p  [routerLink]="['/note', tag.note.id]" routerLinkActive="active">{{tag.note.description}}</p>
+
+       <div class="d-flex justify-content-between">
+          <div [routerLink]="['/notesbyuser', tag.note.userId]">
+            {{tag.note.onModifiedUsername}}
+          </div>
+          <div>
+              {{tag.note.onModified | date:'mediumDate'}}
+          </div>
      </div>
     </div>
 
-  </mat-grid-tile>
+  </div>
+  <!-- Grid column -->
 
-</mat-grid-list>
+</div>
 
 
 <!-- <div *ngFor="let tag of tagList">

@@ -49,6 +49,10 @@ export class NoteService {
     return this.http.put<Note>(this.apiUrl + 'update', note, httpOptions);
   }
 
+  updateNoteImage(note: Note): Observable<Note> {
+    return this.http.put<Note>(this.apiUrl + 'updateImage', note, httpOptions);
+  }
+
   draftNote(note: Note): Observable<Note> {
     return this.http.post<Note>(this.apiUrl + 'draft', note, httpOptions);
   }

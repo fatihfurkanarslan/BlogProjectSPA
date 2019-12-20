@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.getUser(this.userId).subscribe((result: User) => {this.user = result; });
   }
 
-  editProfile(user: User) {
+  editProfile() {
     localStorage.removeItem('editUserId');
     localStorage.setItem('editUserId', this.user.id.toString());
     this.router.navigate(['/editprofile']);

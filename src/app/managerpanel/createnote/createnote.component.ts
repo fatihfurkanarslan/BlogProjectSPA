@@ -11,8 +11,6 @@ import { AuthService } from './../../services/auth.service';
 // import { Photo } from 'src/app/models/photo';
 import { MatSnackBar } from '@angular/material';
 import { SnackbarComponent } from './../../snackbar/snackbar.component';
-
-import { MatChipInputEvent } from '@angular/material/chips';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -61,6 +59,7 @@ export class CreatenoteComponent implements OnInit {
         const data = new FormData();
         data.append('File', images[0]);
         data.append('NoteId', noteId);
+        data.append('MainPhoto', 'false');
 
         axios.post('https://localhost:44369/api/photo/insertphotonote', data, {
           headers: {
@@ -182,7 +181,7 @@ export class CreatenoteComponent implements OnInit {
   // console.log('tags : ' + this.tags);
 
   this.noteService.updateNote(this.noteToInsert).subscribe(data => {
-    console.log('success to update note');
+    this.router.navigate(['/usernotes']);
   }, error => {
     console.log('failed to update note');
   });
