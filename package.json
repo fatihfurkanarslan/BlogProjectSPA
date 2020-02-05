@@ -35,6 +35,7 @@
     "@ngx-share/button": "^7.1.2",
     "@ngx-share/buttons": "^7.1.2",
     "@ngx-share/core": "^7.1.2",
+    "@tinymce/tinymce-angular": "^3.4.0",
     "@types/chart.js": "^2.7.56",
     "angular-bootstrap-md": "^8.1.0",
     "angular-font-awesome": "^3.1.2",

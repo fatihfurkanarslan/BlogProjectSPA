@@ -25,6 +25,28 @@
       <input matInput class="form-control" required placeholder="Description" maxlength=150  name="description" [(ngModel)]="noteToInsert.description">
     </mat-form-field>
 
+    <!-- <editor
+      initialValue="<p>Initial content of the editor</p>"
+      apiKey="czx40oa967qz98yblh9q4f1i56brzooc5evxckd6er7bwe9m"
+      [init]="{
+        height: 500,
+        menubar: false,
+        plugins: [
+          'advlist autolink lists link image charmap print',
+          'preview anchor searchreplace visualblocks code',
+          'fullscreen insertdatetime media table paste',
+          'help wordcount'
+        ],
+        toolbar:
+          'undo redo | formatselect | bold italic | \
+          alignleft aligncenter alignright alignjustify | \
+          bullist numlist outdent indent | help'
+      }"
+    >
+    </editor> -->
+
+    <!-- <angular-editor name="text" [(ngModel)]="noteToInsert.text" (keyup)="keyup($event)" [config]="editorConfig"></angular-editor> -->
+
   <div name="text" [(ngModel)]="noteToInsert.text" (keyup)="keyup($event)" [froalaEditor]="options">Hello, Froala!</div>
 
   <br>

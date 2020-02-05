@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material';
 import { SnackbarComponent } from './../../snackbar/snackbar.component';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-createnote',
@@ -37,6 +38,46 @@ export class CreatenoteComponent implements OnInit {
 
   constructor(private noteService: NoteService, private categoryService: CategoryService,
      private authService: AuthService,  private _snackBar: MatSnackBar, private router: Router) { }
+
+  //    editorConfig: AngularEditorConfig = {
+  //     editable: true,
+  //       spellcheck: true,
+  //       height: 'auto',
+  //       minHeight: '0',
+  //       maxHeight: 'auto',
+  //       width: 'auto',
+  //       minWidth: '0',
+  //       translate: 'yes',
+  //       enableToolbar: true,
+  //       showToolbar: true,
+  //       placeholder: 'Enter text here...',
+  //       defaultParagraphSeparator: '',
+  //       defaultFontName: '',
+  //       defaultFontSize: '',
+  //       fonts: [
+  //         {class: 'arial', name: 'Arial'},
+  //         {class: 'times-new-roman', name: 'Times New Roman'},
+  //         {class: 'calibri', name: 'Calibri'},
+  //         {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+  //       ],
+  //       customClasses: [
+  //       {
+  //         name: 'quote',
+  //         class: 'quote',
+  //       },
+  //       {
+  //         name: 'redText',
+  //         class: 'redText'
+  //       },
+  //       {
+  //         name: 'titleText',
+  //         class: 'titleText',
+  //         tag: 'h1',
+  //       },
+  //     ],
+  //     uploadUrl: 'https://localhost:44369/api/photo/insertphotonote',
+  // };
+
 
   options: Object = {
     charCounterCount: false,

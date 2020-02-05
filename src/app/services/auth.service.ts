@@ -61,6 +61,27 @@ login(model: any) {
   );
 }
 
+loginCheck(){
+
+  // tslint:disable-next-line:prefer-const
+  let token = localStorage.getItem('token');
+  this.decodedToken = this.jwtHelper.decodeToken(token);
+        // this.fireIsLoggedIn.emit(user);
+
+            // tslint:disable-next-line:prefer-const
+        let userId = this.decodedToken.nameid;
+        this.profileService.getUser(userId).subscribe((result: User) => {
+        this.user = result;
+
+        // emit kullanılabilir refresh yapmadan bağımsız componentlar için
+        this.getLoggedInPhoto.emit(this.user.photoUrl);
+        this.getLoggedInActive.emit(this.user.isActive);
+      },
+      error => {
+        console.log('user data fetch failed.');
+                });
+}
+
 register(model: Registermodel) {
   return this.http.post(this.authUrl + 'register', model);
   }

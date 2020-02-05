@@ -54,6 +54,10 @@ import { FileUploadModule } from 'ng2-file-upload';
 // froala editor
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
+// tinymce
+
+import { EditorModule } from '@tinymce/tinymce-angular';
+
 // resolvers
 import { HomeNotes } from './resolvers/homenotes';
 import { Categorynoteresolver } from './resolvers/categorynoteresolver';
@@ -177,7 +181,8 @@ import { ErrorphotobarComponent } from './errorphotobar/errorphotobar.component'
       TagInputModule,
       ShareButtonsModule,
       MDBBootstrapModule.forRoot(),
-      FlexLayoutModule
+      FlexLayoutModule,
+      EditorModule
    ],
    providers: [
       AuthService,
