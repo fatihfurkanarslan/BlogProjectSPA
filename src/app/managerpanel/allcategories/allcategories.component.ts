@@ -4,7 +4,7 @@ import { Category } from './../../models/category';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { DeleteDialogComponent } from './../DeleteDialog/DeleteDialog.component';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { filter } from 'rxjs/operators';
 
 

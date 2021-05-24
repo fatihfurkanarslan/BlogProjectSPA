@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from './../../services/profile.service';
 import { User } from './../../models/user';
 import { AuthService } from 'src/app/services/auth.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PhotobarComponent } from 'src/app/photobar/photobar.component';
 import { PhotoService } from './../../services/photo.service';
 import axios from 'axios';

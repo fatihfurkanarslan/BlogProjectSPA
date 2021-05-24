@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from './../../models/category';
 import { environment } from 'src/environments/environment';
 import { CategoryService } from './../../services/category.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import axios from 'axios';
 import { PhotobarComponent } from 'src/app/photobar/photobar.component';
 import { ErrorphotobarComponent } from 'src/app/errorphotobar/errorphotobar.component';

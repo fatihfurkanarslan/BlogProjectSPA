@@ -4,7 +4,32 @@ import { NgModule, ChangeDetectorRef } from '@angular/core';
 // formsmodule used for data binding in html like register or login
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTabsModule, MatIconModule, MatMenuModule, MatButtonModule, MatTableModule, MatSelect, MatSelectModule, MatOptionModule, MatDialogModule, MatInputModule, MatGridListModule, MatCardModule, MatFormFieldModule, MatSortModule, MatSnackBarModule, MatChipsModule, MatAutocompleteModule} from '@angular/material';
+
+// güncellemeden sonra hata alıyor
+// import { MatOptionModule} from '@angular/material/';
+
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import {MatSelectModule} from '@angular/material/select';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSortModule} from '@angular/material/sort';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatDialogModule} from '@angular/material/dialog';
+
+
+import {MatSelect} from '@angular/material/select';
+
+
+
+
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 // components
@@ -67,7 +92,7 @@ import { RouterModule } from '@angular/router';
 import { Routes } from './routes';
 
 // font awesome
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
+// import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 // devextreme
 import { DxButtonModule, DxFormModule } from 'devextreme-angular';
@@ -105,6 +130,7 @@ import { CommentService } from './services/comment.service';
 import { PhotoService } from './services/photo.service';
 import { LikeService } from './services/like.service';
 import { ErrorphotobarComponent } from './errorphotobar/errorphotobar.component';
+import { angularEditorConfig } from '@kolkov/angular-editor/lib/config';
 
 
 
@@ -150,7 +176,7 @@ import { ErrorphotobarComponent } from './errorphotobar/errorphotobar.component'
       HttpClientModule,
       DxButtonModule,
       RouterModule.forRoot(Routes),
-      AngularFontAwesomeModule,
+      // AngularFontAwesomeModule,
       FileUploadModule,
       AngularEditorModule,
       FroalaEditorModule.forRoot(),
@@ -165,7 +191,6 @@ import { ErrorphotobarComponent } from './errorphotobar/errorphotobar.component'
       MatButtonModule,
       MatTableModule,
       MatSelectModule,
-      MatOptionModule,
       MatIconModule,
       MatDialogModule,
       MatInputModule,

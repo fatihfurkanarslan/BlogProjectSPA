@@ -5,7 +5,7 @@ import { NoteService } from 'src/app/services/note.service';
 import { CategoryService } from './../../services/category.service';
 import { AuthService } from './../../services/auth.service';
 import { Note } from 'src/app/models/note';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from './../../snackbar/snackbar.component';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';

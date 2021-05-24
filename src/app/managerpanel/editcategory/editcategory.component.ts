@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { PhotobarComponent } from 'src/app/photobar/photobar.component';
 import { ErrorphotobarComponent } from './../../errorphotobar/errorphotobar.component';
 import axios from 'axios';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 @Component({

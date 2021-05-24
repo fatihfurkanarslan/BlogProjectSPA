@@ -9,7 +9,7 @@ import { Category } from './../../models/category';
 import { CategoryService } from './../../services/category.service';
 import { AuthService } from './../../services/auth.service';
 // import { Photo } from 'src/app/models/photo';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from './../../snackbar/snackbar.component';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';

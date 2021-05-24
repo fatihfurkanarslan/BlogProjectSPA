@@ -3,7 +3,7 @@ import { TagService } from './../../services/tag.service';
 import { Tag } from './../../models/tag';
 import { Router } from '@angular/router';
 import axios from 'axios';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PhotobarComponent } from './../../photobar/photobar.component';
 import { ErrorphotobarComponent } from './../../errorphotobar/errorphotobar.component';
 import { NoteService } from 'src/app/services/note.service';
