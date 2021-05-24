@@ -44,7 +44,7 @@
     "axios": "^0.18.0",
     "boostrap": "^2.0.0",
     "bootstrap": "^4.3.1",
-    "chart.js": "^2.5.0",
+    "chart.js": "^2.9.4",
     "core-js": "^2.5.4",
     "devextreme": "^18.2.7",
     "devextreme-angular": "^18.2.7",
