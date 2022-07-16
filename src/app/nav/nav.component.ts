@@ -42,7 +42,7 @@ export class NavComponent implements OnInit {
 
   private checkActivate(_isactive: boolean): void {
     this.isactive = _isactive;
-    console.log('active or not ' + this.isactive);
+    console.log('active or not ---> ' + this.isactive);
 
 }
 
@@ -55,12 +55,15 @@ export class NavComponent implements OnInit {
     const token = localStorage.getItem('token');
     // tslint:disable-next-line:prefer-const
     return !!token;
+
+    console.log('loggedIn!!!');
   }
 
 
   loggedOut() {
     localStorage.removeItem('token');
     // this.alertify.success('log out is successfull');
+    console.log('logged out !!');
     this.router.navigate(['/home']);
 
   }
