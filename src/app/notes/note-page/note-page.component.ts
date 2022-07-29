@@ -12,6 +12,11 @@ import { LikeService } from 'src/app/services/like.service';
 import { Like } from './../../models/like';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 0fb8875 (angular 14)
 @Component({
   selector: 'app-note-page',
   templateUrl: './note-page.component.html',
@@ -20,6 +25,11 @@ import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 })
 export class NotePageComponent implements OnInit {
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 0fb8875 (angular 14)
   commentModel: any = {};
   likeModel: any = {};
   id: number;
@@ -52,9 +62,15 @@ export class NotePageComponent implements OnInit {
 
       this.token = localStorage.getItem('token');
 
+<<<<<<< HEAD
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
     });
+=======
+      this.sub = this.route.params.subscribe(params => {
+      this.id = +params['id'];
+      });
+>>>>>>> 0fb8875 (angular 14)
 
 this.noteService.getNote(this.id).subscribe((data: Note) => {
   this.note = data;
@@ -67,10 +83,17 @@ this.tagService.getTags(this.id).subscribe(result => {this.tags = result; },
 console.log('tag service failed ');
   });
 
+<<<<<<< HEAD
     // this.commentService.getComments().subscribe((commentList: Comment[]) => {this.comments = commentList; },
     // error => {
     //   console.log('comment service failed');
 
+=======
+    this.commentService.getComments().subscribe((commentList: Comment[]) => {this.comments = commentList; },
+    error => {
+      console.log('comment service failed');
+    });
+>>>>>>> 0fb8875 (angular 14)
   }
 
   onSubmit() {

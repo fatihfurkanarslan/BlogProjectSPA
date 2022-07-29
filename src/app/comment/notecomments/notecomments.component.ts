@@ -26,7 +26,11 @@ export class NotecommentsComponent implements OnInit {
 
   ngOnInit() {
     this.id = +this.authService.decodedToken.nameid;
+<<<<<<< HEAD
     console.log('name :' + name);
+=======
+    console.log('name and userId in comment component :' + this.id);
+>>>>>>> 0fb8875 (angular 14)
   }
 
   onSubmit() {

@@ -10,7 +10,11 @@
       <mat-label>Choose The Category</mat-label>
       <mat-select style="width: 100%" [(value)]="selectedOption">
         <mat-option *ngFor="let cat of categories" [value]="cat.id">
+<<<<<<< HEAD
           {{cat.categoryname}}
+=======
+          {{cat?.categoryname}}
+>>>>>>> 0fb8875 (angular 14)
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -47,7 +51,18 @@
 
     <!-- <angular-editor name="text" [(ngModel)]="noteToInsert.text" (keyup)="keyup($event)" [config]="editorConfig"></angular-editor> -->
 
+<<<<<<< HEAD
   <div name="text" [(ngModel)]="noteToInsert.text" (keyup)="keyup($event)" [froalaEditor]="options">Hello, Froala!</div>
+=======
+
+  <!-- <div name="text" [(ngModel)]="noteToInsert.text" (keyup)="keyup($event)" [froalaEditor]="options">Hello, Froala!</div> -->
+<div class="articleEditor">
+
+  <div id="editor-js" name="text" (keyup)="keyup($event)"></div>
+
+</div>
+
+>>>>>>> 0fb8875 (angular 14)
 
   <br>
 
@@ -55,8 +70,14 @@
   <br> -->
 
 <div class="row">
+<<<<<<< HEAD
     &nbsp;&nbsp;&nbsp;
     <button (ngSubmit)="onSubmit()"  (click)="openSnackBar()" aria-label="Show an example snack-bar" mat-raised-button>Post </button>
+=======
+
+    <button (ngSubmit)="onSubmit()"  (click)="openSnackBar()" aria-label="Show an example snack-bar" mat-raised-button>Post </button>
+    <br>
+>>>>>>> 0fb8875 (angular 14)
     <button type="button" style="margin-left: 5%" (click)="SaveDraft()" mat-raised-button>Draft </button>
 
 </div>

@@ -25,7 +25,11 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDialogModule} from '@angular/material/dialog';
 
 
+<<<<<<< HEAD
 import {MatSelect} from '@angular/material/select';
+=======
+// import {MatSelect} from '@angular/material/select';
+>>>>>>> 0fb8875 (angular 14)
 
 
 
@@ -70,14 +74,22 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 // angular editor
 
+<<<<<<< HEAD
 import {AngularEditorModule } from '@kolkov/angular-editor';
+=======
+ import {AngularEditorModule } from '@kolkov/angular-editor';
+>>>>>>> 0fb8875 (angular 14)
 
 
 // ng2-fileuplouder
 import { FileUploadModule } from 'ng2-file-upload';
 
 // froala editor
+<<<<<<< HEAD
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+=======
+// import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+>>>>>>> 0fb8875 (angular 14)
 
 // tinymce
 
@@ -95,11 +107,22 @@ import { Routes } from './routes';
 // import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 // devextreme
+<<<<<<< HEAD
 import { DxButtonModule, DxFormModule } from 'devextreme-angular';
 
 // sharebuttons
 
 import { ShareButtonsModule } from '@ngx-share/buttons';
+=======
+// import { DxButtonModule, DxFormModule } from 'devextreme-angular';
+
+// sharebuttons
+
+// import { ShareButtonsModule } from '@ngx-share/buttons';
+// 2022 version
+import { ShareButtonsModule  } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+>>>>>>> 0fb8875 (angular 14)
 
 // md bootstrap
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -107,6 +130,15 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 // flex-layout
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+<<<<<<< HEAD
+=======
+// fontawsome
+
+ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+
+
+>>>>>>> 0fb8875 (angular 14)
 
 
 // services
@@ -130,8 +162,12 @@ import { CommentService } from './services/comment.service';
 import { PhotoService } from './services/photo.service';
 import { LikeService } from './services/like.service';
 import { ErrorphotobarComponent } from './errorphotobar/errorphotobar.component';
+<<<<<<< HEAD
 import { angularEditorConfig } from '@kolkov/angular-editor/lib/config';
 
+=======
+// import { angularEditorConfig } from '@kolkov/angular-editor/lib/config';
+>>>>>>> 0fb8875 (angular 14)
 
 
 
@@ -172,15 +208,26 @@ import { angularEditorConfig } from '@kolkov/angular-editor/lib/config';
       BrowserModule,
       AppRoutingModule,
       FormsModule,
+<<<<<<< HEAD
       DxFormModule,
       HttpClientModule,
       DxButtonModule,
+=======
+     // DxFormModule,
+      HttpClientModule,
+     // DxButtonModule,
+>>>>>>> 0fb8875 (angular 14)
       RouterModule.forRoot(Routes),
       // AngularFontAwesomeModule,
       FileUploadModule,
       AngularEditorModule,
+<<<<<<< HEAD
       FroalaEditorModule.forRoot(),
       FroalaViewModule.forRoot(),
+=======
+      // FroalaEditorModule.forRoot(),
+      // FroalaViewModule.forRoot(),
+>>>>>>> 0fb8875 (angular 14)
       InfiniteScrollModule,
       MatTabsModule,
       FormsModule,
@@ -204,10 +251,22 @@ import { angularEditorConfig } from '@kolkov/angular-editor/lib/config';
       MatChipsModule,
       MatAutocompleteModule,
       TagInputModule,
+<<<<<<< HEAD
       ShareButtonsModule,
       MDBBootstrapModule.forRoot(),
       FlexLayoutModule,
       EditorModule
+=======
+      ShareButtonsModule.withConfig({
+           debug : true
+      }),
+      MDBBootstrapModule.forRoot(),
+      FlexLayoutModule,
+      EditorModule,
+      ShareIconsModule,
+      FontAwesomeModule
+
+>>>>>>> 0fb8875 (angular 14)
    ],
    providers: [
       AuthService,
