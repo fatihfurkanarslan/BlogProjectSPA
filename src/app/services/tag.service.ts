@@ -1,19 +1,12 @@
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-=======
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
->>>>>>> 0fb8875 (angular 14)
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Tag } from './../models/tag';
 import { Tagmodel } from '../models/tagmodel';
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 0fb8875 (angular 14)
 const httpOptions = {
   headers: new HttpHeaders({
     'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -24,10 +17,7 @@ const httpOptions = {
 })
 export class TagService {
 
-<<<<<<< HEAD
-=======
   tag: Tagmodel = new Tagmodel();
->>>>>>> 0fb8875 (angular 14)
 
   apiUrl = environment.apiUrl + 'tag/';
 
@@ -41,10 +31,6 @@ insertTag(tag: Tag): Observable<Tag> {
   return this.http.post<Tag>(this.apiUrl + 'insert', tag, httpOptions);
 }
 
-<<<<<<< HEAD
-getNotesByTag(tag: Tagmodel): Observable<Tag[]> {
-  return this.http.post<Tag[]>(this.apiUrl + 'getnotesbytag', tag, httpOptions);
-=======
 getNotesByTag(tag: string): Observable<Tag[]> {
   console.log("getNotesByTag worked : " + tag);
 
@@ -52,7 +38,6 @@ getNotesByTag(tag: string): Observable<Tag[]> {
   this.tag.tagParam = tag;
   return this.http.post<Tag[]>(this.apiUrl + 'gettags', this.tag, httpOptions);
 
->>>>>>> 0fb8875 (angular 14)
 }
 
 }

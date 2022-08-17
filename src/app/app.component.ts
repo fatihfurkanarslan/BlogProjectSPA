@@ -3,10 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthService } from './services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ProfileService } from './services/profile.service';
-<<<<<<< HEAD
-=======
 import { User } from 'src/app/models/user';
->>>>>>> 0fb8875 (angular 14)
 
 @Component({
   selector: 'app-root',
@@ -31,14 +28,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-<<<<<<< HEAD
-    const token = localStorage.getItem('token');
-    if (token) {
-         this.authService.decodedToken = this.jwtHelper.decodeToken(token);
-
-          this.authService.loginCheck();
-        }
-=======
 
     this.setCurrentUser();
 
@@ -48,7 +37,6 @@ export class AppComponent implements OnInit {
 
     // //       this.authService.loginCheck();
     // //     }
->>>>>>> 0fb8875 (angular 14)
           //  this.decodedToken = this.jwtHelper.decodeToken(token);
           //  // tslint:disable-next-line:prefer-const
           //  let userId = this.authService.decodedToken;
@@ -68,12 +56,9 @@ export class AppComponent implements OnInit {
 
   }
 
-<<<<<<< HEAD
-=======
   setCurrentUser(){
     const token: string = JSON.parse(localStorage.getItem('token'));
     this.authService.setCurrentUser(token);
   }
 
->>>>>>> 0fb8875 (angular 14)
 }

@@ -9,8 +9,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from './../../snackbar/snackbar.component';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-<<<<<<< HEAD
-=======
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
@@ -19,7 +17,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { map, catchError, tap, debounceTime, skip } from 'rxjs/operators';
 import {type} from 'os';
->>>>>>> 0fb8875 (angular 14)
 
 @Component({
   selector: 'app-editnote',
@@ -35,8 +32,6 @@ export class EditnoteComponent implements OnInit {
   imageList: string[] = [];
   durationInSeconds = 3;
 
-<<<<<<< HEAD
-=======
 
   editor: any;
 
@@ -47,7 +42,6 @@ export class EditnoteComponent implements OnInit {
 
 
 
->>>>>>> 0fb8875 (angular 14)
   note: Note;
 
   constructor(private noteService: NoteService, private categoryService: CategoryService,
@@ -55,45 +49,6 @@ export class EditnoteComponent implements OnInit {
        this.note = new Note();
       }
 
-<<<<<<< HEAD
-  options: Object = {
-    charCounterCount: false,
-    placeholderText: 'Edit Your Content Here!',
-    imageUpload: true,
-    imageDefaultAlign: 'left',
-    imageDefaultDisplay: 'inline-block',
-    pastePlain: true,
-    heightMin: 150,
-    // Set max image size to 3MB.
-    imageMaxSize: 3 * 1024 * 1024,
-    // Allow to upload PNG and JPG.
-    imageAllowedTypes: ['jpeg', 'jpg', 'png'],
-    events: {
-      'froalaEditor.image.beforeUpload': function(e, editor, images) {
-        // Before image is uploaded
-        const noteId = localStorage.getItem('noteId');
-        const data = new FormData();
-        data.append('File', images[0]);
-        data.append('NoteId', noteId);
-
-        axios.post('https://localhost:44369/api/photo/insert', data, {
-          headers: {
-            'accept': 'application/json',
-            'Content-Type': 'multipart/form-data'
-          }
-        }).then(res => {
-          // console.log(res.data);
-           editor.image.insert(res.data, null, null, editor.image.get());
-           // this.imageList.push(res.data);
-           console.log('noteId of photo is ' + this.noteId);
-        }).catch(err => {
-          console.log(err);
-        });
-        return false;
-      }
-    }
-  };
-=======
     //   editorConfig: AngularEditorConfig = {
     //     editable: true,
     //       spellcheck: true,
@@ -172,7 +127,6 @@ export class EditnoteComponent implements OnInit {
   // };
 
 
->>>>>>> 0fb8875 (angular 14)
 
   ngOnInit() {
 
@@ -185,22 +139,6 @@ export class EditnoteComponent implements OnInit {
       console.log('category service failed');
     });
 
-<<<<<<< HEAD
-    this.noteService.getNote(+noteId).subscribe(result => { this.note = result; });
-
-  }
-
-  onSubmit() {
-    // this.imageList = item.attributes['img'].value;
-    // console.log(this.imageList);
-      const images = $('img').map(function() {
-        return $(this).attr('src').toString();
-     });
-
-     for (let i = 0; i < images.length; i++) {
-       this.imageList.push(images[i].toString());
-     }
-=======
     this.noteService.getNote(+noteId).subscribe(result => {
        this.note = result;
       console.log("raw text in edit page" + this.note.rawText);
@@ -434,17 +372,13 @@ export class EditnoteComponent implements OnInit {
     //  }
 
      this.JsonToHtml();
->>>>>>> 0fb8875 (angular 14)
 
     this.note.categoryId = this.selectedOption;
     this.note.userId = this.userId;
      this.note.photos = this.imageList;
      this.note.isDraft = false;
-<<<<<<< HEAD
-=======
      this.note.text = this.HtmlData;
      this.note.rawText = this.editorData;
->>>>>>> 0fb8875 (angular 14)
 
     this.noteService.updateNote(this.note).subscribe(data => {
       console.log('success to update note');
@@ -455,15 +389,6 @@ export class EditnoteComponent implements OnInit {
   }
 
   SaveDraft() {
-<<<<<<< HEAD
-    const images = $('img').map(function() {
-      return $(this).attr('src').toString();
-   });
-
-   for (let i = 0; i < images.length; i++) {
-     this.imageList.push(images[i].toString());
-   }
-=======
   //   const images = $('img').map(function() {
   //     return $(this).attr('src').toString();
   //  });
@@ -474,7 +399,6 @@ export class EditnoteComponent implements OnInit {
 
    this.JsonToHtml();
 
->>>>>>> 0fb8875 (angular 14)
 
   // $('img').map();
   // this.imageList.push($('img').prop('src'));
@@ -487,11 +411,8 @@ export class EditnoteComponent implements OnInit {
   this.note.userId = this.userId;
    this.note.photos = this.imageList;
    this.note.isDraft = true;
-<<<<<<< HEAD
-=======
    this.note.text = this.HtmlData;
      this.note.rawText = this.editorData;
->>>>>>> 0fb8875 (angular 14)
 
   this.noteService.updateNote(this.note).subscribe(data => {
     console.log('success to insert note');

@@ -1,16 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
-<<<<<<< HEAD
-@import '../node_modules/font-awesome/css/font-awesome.min.css';
-@import '../node_modules/@ngx-share/button/themes/default/default-theme.css';
-=======
 
 /*@import '../node_modules/font-awesome/scss/font-awesome.scss'; */
 /* @import '../node_modules/@ngx-share/button/themes/default/default-theme.css'; */
 
 
->>>>>>> 0fb8875 (angular 14)
 
 
 
@@ -23,11 +18,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .imageback {
-<<<<<<< HEAD
-  background-image: url('https://cdn.photographypro.com/wp-content/uploads/2018/01/black-and-white-photography-city-fog@2x-1.jpg');
-=======
   background-image: url('https://cdn.photographypro.com/wp-content/uploads/2018/01/black-and-white-photography-city-fog@2x.jpg');
->>>>>>> 0fb8875 (angular 14)
 
   background-position: center;
   background-repeat: no-repeat;

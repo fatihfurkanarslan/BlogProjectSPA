@@ -8,13 +8,6 @@
         "name": "Attach to Chrome",
         "port": 9222,
         "request": "attach",
-<<<<<<< HEAD
-        "type": "pwa-chrome",
-        "webRoot": "${workspaceFolder}"
-      },
-
-        {
-=======
         "type": "chrome",
         "webRoot": "${workspaceFolder}"
       },
@@ -26,16 +19,11 @@
         "webRoot": "${workspaceFolder}"
       },
       {
->>>>>>> 0fb8875 (angular 14)
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:4200",
             "webRoot": "${workspaceFolder}"
-<<<<<<< HEAD
-        }
-=======
       }
->>>>>>> 0fb8875 (angular 14)
     ]
 }

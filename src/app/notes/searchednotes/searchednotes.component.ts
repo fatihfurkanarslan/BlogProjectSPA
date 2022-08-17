@@ -4,10 +4,7 @@ import { TagService } from 'src/app/services/tag.service';
 import { Tag } from 'src/app/models/tag';
 import { Tagmodel } from 'src/app/models/tagmodel';
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 0fb8875 (angular 14)
 @Component({
   selector: 'app-searchednotes',
   templateUrl: './searchednotes.component.html',
@@ -15,19 +12,6 @@ import { Tagmodel } from 'src/app/models/tagmodel';
 })
 export class SearchednotesComponent implements OnInit {
 
-<<<<<<< HEAD
-  searchToTag: any = null;
-  tag: Tagmodel = new Tagmodel();
-  tagList: Tag[];
-  constructor(private router: Router, private tagService: TagService) { }
-
-  ngOnInit() {
-      const {redirect} = window.history.state;
-      this.searchToTag = redirect;
-      this.tag.tag = this.searchToTag;
-
-      this.tagService.getNotesByTag(this.tag).subscribe(result => {this.tagList = result; },
-=======
   searchToTag: string;
 
   tagList: Tag[];
@@ -52,7 +36,6 @@ export class SearchednotesComponent implements OnInit {
         }
 
       },
->>>>>>> 0fb8875 (angular 14)
       error => {console.log('çalışmadı'); });
 
   }

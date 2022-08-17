@@ -8,11 +8,7 @@ import { AuthService } from './auth.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
-<<<<<<< HEAD
-    'Authorization': 'Bearer ' + localStorage.getItem('token')
-=======
     'Authorization': 'Bearer ' + localStorage.getItem('user')
->>>>>>> 0fb8875 (angular 14)
   }).set('content', 'application/json')
 };
 

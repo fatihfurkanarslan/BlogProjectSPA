@@ -24,13 +24,10 @@
         "node_modules/jszip/dist/jszip.min.js"
       ]
     }
-<<<<<<< HEAD
-=======
   },
   "angularCompilerOptions": {
 
     "strictTemplates": true
 
->>>>>>> 0fb8875 (angular 14)
   }
 }
