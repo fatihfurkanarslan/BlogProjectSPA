@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Tag } from './../models/tag';
 import { Tagmodel } from '../models/tagmodel';
+import { TagToInsert } from './../models/tagToInsert';
 
 
 
@@ -27,17 +28,8 @@ getTags(noteId: number): Observable<Tag[]> {
   return this.http.get<Tag[]>(this.apiUrl + 'gettags/' + noteId, httpOptions);
 }
 
-insertTag(tag: Tag): Observable<Tag> {
+insertTag(tag: TagToInsert): Observable<Tag> {
   return this.http.post<Tag>(this.apiUrl + 'insert', tag, httpOptions);
-}
-
-getNotesByTag(tag: string): Observable<Tag[]> {
-  console.log("getNotesByTag worked : " + tag);
-
-  //error in tagparam Cannot set properties of undefined (setting 'tagParam')
-  this.tag.tagParam = tag;
-  return this.http.post<Tag[]>(this.apiUrl + 'gettags', this.tag, httpOptions);
-
 }
 
 }

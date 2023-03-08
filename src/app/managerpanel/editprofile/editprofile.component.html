@@ -1,7 +1,7 @@
 <mat-card class="example-card">
   <span class="center">Edit Profile</span>
 <mat-form-field class="example-full-width">
-  <input matInput class="form-control" placeholder="Username" maxlength=20  name="username" [(ngModel)]="user.username">
+  <input matInput class="form-control" placeholder="username" maxlength=20  name="username" [(ngModel)]="user.username">
 </mat-form-field>
 <mat-form-field class="example-full-width">
     <input matInput class="form-control" placeholder="firstname" maxlength=20  name="firstname" [(ngModel)]="user.firstname">
@@ -26,6 +26,6 @@
 
 
 <mat-card-actions>
-  <button mat-button style="margin-left: 40%" (click)="updateProfile()">Save Changes</button>
+  <button mat-button style="margin: auto" (click)="updateProfile()">Save Changes</button>
 </mat-card-actions>
 </mat-card>

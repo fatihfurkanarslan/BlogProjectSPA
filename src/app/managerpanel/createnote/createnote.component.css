@@ -20,3 +20,13 @@ ngc-float-button  {
 .example-container > input {
   width: 100%;
 }
+
+
+.action_btn {
+  width: 300px;
+  margin: 0 auto;
+ }
+
+ /* #buttons {
+
+ } */

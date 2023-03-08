@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ɵConsole, NgProbeToken } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ɵConsole, NgProbeToken, SimpleChanges, OnChanges, OnDestroy } from '@angular/core';
 import { Note } from 'src/app/models/note';
 import * as $ from 'jquery';
 // import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
@@ -11,18 +11,18 @@ import { AuthService } from './../../services/auth.service';
 // import { Photo } from 'src/app/models/photo';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from './../../snackbar/snackbar.component';
-import { FormControl } from '@angular/forms';
+
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, catchError, tap, debounceTime, skip } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { map, catchError, tap, debounceTime, skip, switchMap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import ImageTool from '@editorjs/image';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { type } from 'os';
+import { untilDestroyed } from '@ngneat/until-destroy';
 
-
+import { debounce } from 'lodash';
 
 
 @Component({
@@ -31,11 +31,9 @@ import { type } from 'os';
   styleUrls: ['./createnote.component.css']
 })
 
-export class CreatenoteComponent implements OnInit {
+export class CreatenoteComponent implements OnInit, OnDestroy {
 
   public noteToInsert = new Note();
-  categories: Category[] = [];
-  selectedOption: any = {};
   userId: any = {};
   noteId: any = {};
   imageList: string[] = [];
@@ -51,9 +49,16 @@ export class CreatenoteComponent implements OnInit {
   editorData: any;
   parsedData: JSON;
   HtmlData: string = "";
+  timer: any = 2;
 
-  constructor(private noteService: NoteService, private categoryService: CategoryService,
-     private authService: AuthService,  private _snackBar: MatSnackBar, private router: Router) { }
+  savingEditor: boolean = false;
+  //autosaving
+
+
+  constructor(private noteService: NoteService, private authService: AuthService,
+      private _snackBar: MatSnackBar, private router: Router) {
+    
+       }
 
   //    editorConfig: AngularEditorConfig = {
   //     editable: true,
@@ -178,16 +183,6 @@ export class CreatenoteComponent implements OnInit {
 
     this.userId = this.authService.decodedToken.nameid;
 
-    console.log(this.userId);
-
-    this.categoryService.getCategories().subscribe((categoryList: Category[]) => {this.categories = categoryList; },
-    error => {
-      console.log('category service failed');
-    });
-
-    // this.noteToInsert.userId = this.userId;
-    // this.noteToInsert.isDraft = true;
-
     this.editor = new EditorJS({
 
       holder: 'editor-js',
@@ -268,23 +263,88 @@ export class CreatenoteComponent implements OnInit {
           }
         }
       }
+    },
+  
+    onChange: () => {
+      console.log("onchange e girdi")
+      this.saveEditorData();
+      this.extendedDebounceHandler();
     }
-    // data: {}
-    });
-
-    this.detectEditorChanges().pipe(
-      debounceTime(300),
-      skip(1),
-      untilDestroyed(this)
-    ).subscribe(data=>{
-      this.editor.save().then((outputData)=>{
-        this.editorData =  JSON.stringify(outputData, null, 2);
-      });
     });
   }
 
-  JsonToHtml() {
-    let parsedData = JSON.parse(this.editorData);
+  extendedDebounceHandler = debounce(() => {
+  
+    if(localStorage.getItem('noteId') == null){
+      console.log("if bloğunda.." + localStorage.getItem('noteId'));
+      this.noteToInsert.userId = this.userId;
+      this.noteToInsert.isDraft = true;
+      this.noteToInsert.categoryId = 1;
+      //console.log("localstore getitem worked.." + localStorage.getItem('noteId'));
+      this.noteService.draftNote(this.noteToInsert).subscribe(id => {
+        this.noteId = id;
+        localStorage.setItem('noteId', this.noteId);
+       },
+         error => {
+           console.log('note id service failed');
+         });
+        }else{
+        console.log('else bloğunda');
+        this.SaveDraft();
+    
+        }
+  }, 3000);
+
+  SaveDraft() {
+    // tslint:disable-next-line:prefer-const
+    let noteId = localStorage.getItem('noteId');
+
+  //  this.saveEditorData();
+
+    const images = $('img').map(function() {
+      return $(this).attr('src').toString();
+   });
+
+   for (let i = 0; i < images.length; i++) {
+     this.imageList.push(images[i].toString());
+   }
+
+  
+  // $('img').map();
+  // this.imageList.push($('img').prop('src'));
+  // for (let i = 0; i < imgArray.length; i++) {
+  //   this.noteToInsert.photos[i] = imgArray[i];
+  //     }
+  // console.log('photooo ' + this.noteToInsert.photos[0]);
+  // this.noteToInsert.photos.push();
+  // this.noteToInsert.categoryId = this.selectedOption;
+  this.noteToInsert.userId = this.userId;
+  this.noteToInsert.photos = this.imageList;
+  this.noteToInsert.isDraft = true;
+  this.noteToInsert.id = +noteId;
+  this.noteToInsert.text = this.HtmlData;
+  this.noteToInsert.rawText = this.editorData;
+
+  //console.log("this.noteToInsert.rawText : " + this.editorData);
+
+   // this.noteToInsert.tags = this.tags;
+
+  // console.log('tags : ' + this.tags);
+
+  this.noteService.updateNote(this.noteToInsert).subscribe(data => {
+    //this.router.navigate(['/usernotes']);
+    //console.log('successed to update note');
+    this.openSnackBarDraft();
+  }, error => {
+    console.log('failed to update note');
+  });
+  }
+
+  saveEditorData = debounce(() => { 
+    this.editor.save().then((outputData) => {
+      this.editorData =  JSON.stringify(outputData, null, 2);
+      console.log("*editordata : " + this.editorData);
+      let parsedData = JSON.parse(this.editorData);
 
     for (let i = 0; i < parsedData.blocks.length; i++) {
       let block = parsedData.blocks[i];
@@ -299,64 +359,35 @@ export class CreatenoteComponent implements OnInit {
         }
         // console.log("HtmlData : " + this.HtmlData);
       }
-    }
-
-
-  saveEditorData() : void {
-    this.editor.save().then((outputData) => {
-      this.editorData =  JSON.stringify(outputData, null, 2);
-      console.log("*editordata : " + this.editorData);
-    })
-  }
+    })}, 1000)
 
   ngOnDestroy(): void {
-    this.editorObserver.disconnect();
+    localStorage.removeItem('noteId');
+    //localStorage.removeItem('editNoteId');
   }
 
 
-  detectEditorChanges(): Observable <any> {
+  // detectEditorChanges(): Observable <any> {
 
-    return new Observable(observer => {
+  //   return new Observable(observer => {
 
-      const editorDom = document.querySelector('#editor-js');
-      const config = { attributes: true, childList: true, subtree: true };
+  //     const editorDom = document.querySelector('#editor-js');
+  //     const config = { attributes: true, childList: true, subtree: true };
 
-      this.editorObserver = new MutationObserver((mutation) => {
-        observer.next(mutation);
-      })
-      this.editorObserver.observe(editorDom, config);
+  //     this.editorObserver = new MutationObserver((mutation) => {
+  //       observer.next(mutation);
+  //     })
+  //     this.editorObserver.observe(editorDom, config);
 
-    })
-  }
+  //   })
+  // }
 
-
-  // keypress dosnt work when paste something to editor but keyup is okey
-  keyup(event: any) {
-    console.log('keyup worked');
-    if (this.fired === false){
-      console.log('note id service worked');
-      // neden 3 bakılacak??
-    this.noteToInsert.categoryId = 3;
-    this.noteToInsert.title = 'draft';
-    this.noteToInsert.description = 'draft';
-    this.noteToInsert.userId = this.userId;
-    this.noteToInsert.isDraft = true;
-
-    this.noteService.draftNote(this.noteToInsert).subscribe(id => {this.noteId = id;
-    localStorage.setItem('noteId', this.noteId);
-   },
-     error => {
-       console.log('note id service failed');
-     });
-     this.fired = true;
-    }
-  }
 
   onSubmit() {
 
     // tslint:disable-next-line:prefer-const
     let noteId = localStorage.getItem('noteId');
-    this.JsonToHtml();
+  
 
       const images = $('img').map(function() {
         return $(this).attr('src').toString();
@@ -365,6 +396,8 @@ export class CreatenoteComponent implements OnInit {
      for (let i = 0; i < images.length; i++) {
        this.imageList.push(images[i].toString());
      }
+
+     //this.saveEditorData();
 
    // console.log(this.tagList + ' fskdfs');
 
@@ -375,7 +408,7 @@ export class CreatenoteComponent implements OnInit {
     //     }
     // console.log('photooo ' + this.noteToInsert.photos[0]);
     // this.noteToInsert.photos.push();
-    this.noteToInsert.categoryId = this.selectedOption;
+    //this.noteToInsert.categoryId = this.selectedOption;
     this.noteToInsert.userId = this.userId;
      this.noteToInsert.photos = this.imageList;
      this.noteToInsert.isDraft = false;
@@ -385,13 +418,17 @@ export class CreatenoteComponent implements OnInit {
 
      this.noteToInsert.id = +noteId;
 
-     console.log("*editordata : " + this.editorData);
+     console.log("this.noteToInsert.text = " + this.HtmlData);
 
-     console.log("*parseddata : " + this.parsedData);
+    //  console.log("*editordata : " + this.editorData);
+
+    //  console.log("*parseddata : " + this.parsedData);
    // console.log('tags : ' + this.tags);
 
     this.noteService.updateNote(this.noteToInsert).subscribe(data => {
       console.log('success to update note');
+      localStorage.setItem('editNoteId', this.noteId);
+
     }, error => {
       console.log('failed to update note');
     });
@@ -400,47 +437,8 @@ export class CreatenoteComponent implements OnInit {
 
   }
 
-  SaveDraft() {
-    // tslint:disable-next-line:prefer-const
-    let noteId = localStorage.getItem('noteId');
 
-    this.JsonToHtml();
 
-    const images = $('img').map(function() {
-      return $(this).attr('src').toString();
-   });
-
-   for (let i = 0; i < images.length; i++) {
-     this.imageList.push(images[i].toString());
-   }
-
-  // $('img').map();
-  // this.imageList.push($('img').prop('src'));
-  // for (let i = 0; i < imgArray.length; i++) {
-  //   this.noteToInsert.photos[i] = imgArray[i];
-  //     }
-  // console.log('photooo ' + this.noteToInsert.photos[0]);
-  // this.noteToInsert.photos.push();
-  this.noteToInsert.categoryId = this.selectedOption;
-  this.noteToInsert.userId = this.userId;
-  this.noteToInsert.photos = this.imageList;
-  this.noteToInsert.isDraft = true;
-  this.noteToInsert.id = +noteId;
-  this.noteToInsert.text = this.HtmlData;
-  this.noteToInsert.rawText = this.editorData;
-
-  console.log("*editordata : " + this.editorData);
-
-   // this.noteToInsert.tags = this.tags;
-
-  // console.log('tags : ' + this.tags);
-
-  this.noteService.updateNote(this.noteToInsert).subscribe(data => {
-    this.router.navigate(['/usernotes']);
-  }, error => {
-    console.log('failed to update note');
-  });
-  }
 
   openSnackBar() {
     this._snackBar.openFromComponent(SnackbarComponent, {
@@ -449,9 +447,11 @@ export class CreatenoteComponent implements OnInit {
     });
   }
 
-
-
-
-
+  openSnackBarDraft() {
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      duration: this.durationInSeconds * 1000,
+      verticalPosition: 'top'
+    });
+  }
 
 }

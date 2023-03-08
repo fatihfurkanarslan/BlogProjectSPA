@@ -15,7 +15,7 @@ import { ErrorphotobarComponent } from 'src/app/errorphotobar/errorphotobar.comp
 })
 export class EditprofileComponent implements OnInit {
 
-  user;
+  user: User;
   userId: number;
 
   selectedFile: File = null;
@@ -25,17 +25,19 @@ export class EditprofileComponent implements OnInit {
 
   constructor(private profileService: ProfileService, private _snackBar: MatSnackBar,
      private authService: AuthService, private photoService: PhotoService) {
-
-      profileService.getChangeInPhoto.subscribe(photoUrl => this.changePhoto(photoUrl));
+      this.user = new User();
+      
+      this.profileService.getChangeInPhoto.subscribe(photoUrl => this.changePhoto(photoUrl));
       }
 
       private changePhoto(_photoUrl: string): void {
         this.photoUrl = _photoUrl;
-    }
+        
+      }
 
   ngOnInit() {
 
-    this.user = new User();
+    
     // tslint:disable-next-line:prefer-const
     // let userId = localStorage.getItem('editUserId');
     this.userId = this.authService.decodedToken.nameid;
@@ -56,6 +58,9 @@ export class EditprofileComponent implements OnInit {
       }
     }).then(res => {
        this.photoUrl = res.data;
+       this.user.photoUrl = this.photoUrl;
+      
+       console.log("PhotoUrl : " + this.photoUrl);
        this.openSnackBar();
 
     }).catch(err => {
@@ -73,8 +78,12 @@ export class EditprofileComponent implements OnInit {
 
   updateProfile() {
 
-    this.user.photoUrl = this.photoUrl;
-    this.profileService.updateUser(this.user).subscribe(result => {console.log('basarılı edit user'); },
+    console.log('in editprofile in updateprofil method' + this.user.photoUrl);
+    
+    this.profileService.updateUser(this.user).subscribe(result => {
+     
+    
+      console.log('basarılı edit user'); },
     error => {
       console.log('failed at edit user');
     }

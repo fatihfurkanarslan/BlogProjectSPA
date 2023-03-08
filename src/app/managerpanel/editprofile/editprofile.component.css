@@ -3,14 +3,15 @@
 }
 
 .example-card {
-  max-width: 50%;
-  margin-left: 25%;
+  max-width: 40%;
+  text-align: center;
+  margin: auto;
 }
 
-.center {
+/* .center {
   margin-left: 45%;
-}
+} */
 
-.centerphoto {
+/* .centerphoto {
   margin-left: 37%;
-}
+} */

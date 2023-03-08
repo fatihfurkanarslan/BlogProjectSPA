@@ -9,6 +9,9 @@ import { ErrorphotobarComponent } from './../../errorphotobar/errorphotobar.comp
 import { NoteService } from 'src/app/services/note.service';
 import { Note } from 'src/app/models/note';
 import { ProfileService } from './../../services/profile.service';
+import { TagToInsert } from './../../models/tagToInsert';
+import { CategoryService } from 'src/app/services/category.service';
+import { Category } from 'src/app/models/category';
 
 @Component({
   selector: 'app-createtags',
@@ -17,10 +20,12 @@ import { ProfileService } from './../../services/profile.service';
 })
 export class CreatetagsComponent implements OnInit {
 
+  categories: Category[] = [];
+  selectedOption: any = {};
   tagList: string[] = [];
   noteId: any;
 
-  tag: Tag = new Tag();
+  tag: TagToInsert = new TagToInsert();
 
   selectedFile: File = null;
   durationInSeconds = 3;
@@ -29,10 +34,10 @@ export class CreatetagsComponent implements OnInit {
   note: Note;
 
   constructor(private tagService: TagService, private router: Router,
-     private _snackBar: MatSnackBar, private noteService: NoteService, private profileService: ProfileService) {
+     private _snackBar: MatSnackBar, private noteService: NoteService, private profileService: ProfileService, private categoryService: CategoryService) {
 
        this.note = new Note();
-       profileService.getChangeInPhoto.subscribe(photoUrl => this.changePhoto(photoUrl));
+       //profileService.getChangeInPhoto.subscribe(photoUrl => this.changePhoto(photoUrl));
 
        this.photoUrl = 'http://cloudrangers.com/blog/wp-content/uploads/2017/08/blog_default.png';
       }
@@ -42,13 +47,21 @@ export class CreatetagsComponent implements OnInit {
     }
   ngOnInit() {
         // tslint:disable-next-line:prefer-const
-    this.noteId = localStorage.getItem('noteId');
+   
+
+    this.categoryService.getCategories().subscribe((categoryList: Category[]) => {this.categories = categoryList; },
+    error => {
+      console.log('category service failed');
+    });
   }
 
   onSubmit() {
 
+    this.noteId = localStorage.getItem('editNoteId');
     this.tag.noteId = +this.noteId;
     this.tag.tags = this.tagList;
+
+    console.log("editnoteid " + this.noteId)
 
     this.tagService.insertTag(this.tag).subscribe(result => {
       console.log('basarılı bir tag ekleme');
@@ -57,8 +70,11 @@ export class CreatetagsComponent implements OnInit {
       console.log('basarısız bir tag ekleme');
     });
 
+    //console.log("User id " + this.noteId)
     this.note.mainPhotourl = this.photoUrl;
     this.note.id = +this.noteId;
+    this.note.categoryId = this.selectedOption;
+    
 
     this.noteService.updateNoteImage(this.note).subscribe(result => {
       this.router.navigate(['/usernotes']);

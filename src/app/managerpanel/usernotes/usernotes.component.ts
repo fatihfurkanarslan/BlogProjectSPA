@@ -33,11 +33,16 @@ export class UsernotesComponent implements OnInit {
     this.userId = this.authService.decodedToken.nameid;
 
     this.noteService.getDraftNotes(this.userId).subscribe((result) => {
+
+      
+
       this.draftNotes = new MatTableDataSource(result);
       this.realNotes = new MatTableDataSource(result);
+      console.log(" Im in usernotes ");
 
 
       this.draftNotes.filterPredicate = (data, filter: boolean) => {
+      
 return (data.isDraft === filter);
 };
 this.draftNotes.filter = true;
@@ -57,7 +62,17 @@ this.realNotes.filterPredicate = (data, filter: boolean) => {
     //     }
     // });
  // this.dataSrc = result;
+       result.forEach( x => {
+          if(x.title == null){    
+              //regex e bak       
+              //x.text.replace(/(<p>)|(</p>)|(<header>)|(</header>)/g/, '');
+              x.title = x.text;        
+          }         
+        })
+
        this.notes = result;
+       
+      
     },
       error => {
          console.log('getdrafts methods failed');

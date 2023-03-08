@@ -7,7 +7,7 @@
     </select>
   </div> -->
 
-  <mat-form-field style="width: 100%">
+  <!-- <mat-form-field style="width: 100%">
       <mat-label>Choose The Category</mat-label>
       <mat-select style="width: 100%" [(value)]="selectedOption">
         <mat-option *ngFor="let cat of categories" [value]="cat.id">
@@ -23,7 +23,7 @@
 
 <mat-form-field class="example-full-width">
     <input matInput class="form-control" required placeholder="Description" maxlength=150  name="description" [(ngModel)]="note.description">
-  </mat-form-field>
+  </mat-form-field> -->
 
   <!-- <div name="text" [(ngModel)]="note.text" [froalaEditor]="options"></div> -->
 
@@ -49,11 +49,11 @@
   </div> -->
   <div class="row">
       &nbsp;&nbsp;&nbsp;
-      <button (ngSubmit)="onSubmit()"  (click)="openSnackBar()"
-       aria-label="Show an example snack-bar" mat-raised-button>Post </button>
-      <button type="button" style="margin-left: 5%" [routerLink]="['/usernotes']" routerLinkActive="active"
-       (click)="SaveDraft()" mat-raised-button>Draft </button>
-
+        <button class="action_btn" (ngSubmit)="onSubmit()"  mat-raised-button>
+          Post </button>
+        <!-- <button class="action_btn" [routerLink]="['/usernotes']" routerLinkActive="active"
+         type="button" (click)="SaveDraft()" mat-raised-button>
+          Draft </button> -->
   </div>
 
 </form>

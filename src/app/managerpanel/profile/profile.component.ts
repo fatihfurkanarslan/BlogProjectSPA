@@ -15,7 +15,9 @@ export class ProfileComponent implements OnInit {
   user: User;
   userId: number;
 
-  constructor(private profileService: ProfileService, private authService: AuthService, private router: Router) { }
+  constructor(private profileService: ProfileService, private authService: AuthService, private router: Router) {
+    this.user = new User();
+   }
 
   ngOnInit() {
     this.userId = this.authService.decodedToken.nameid;

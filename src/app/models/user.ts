@@ -9,5 +9,7 @@ export class User {
   photoUrl: string;
   isActive: boolean;
   token: string;
+  isFollowed: boolean;
+  followInfo: string;
 
 }

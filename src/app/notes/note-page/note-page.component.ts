@@ -11,6 +11,7 @@ import { Tag } from './../../models/tag';
 import { LikeService } from 'src/app/services/like.service';
 import { Like } from './../../models/like';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
+import { ArrayFixPipe } from 'src/app/array-fix.pipe';
 
 
 
@@ -44,6 +45,7 @@ export class NotePageComponent implements OnInit {
   tags: Tag[];
 
   htmlCode: SafeHtml;
+  toBeParsedData: any;
   token: any;
 
   constructor(private route: ActivatedRoute, private noteService: NoteService,
@@ -62,14 +64,15 @@ export class NotePageComponent implements OnInit {
 
 this.noteService.getNote(this.id).subscribe((data: Note) => {
   this.note = data;
-  this.htmlCode = this.domSanitizer.bypassSecurityTrustHtml(this.note.text);
+  this.toBeParsedData = JSON.parse(this.note.rawText);
+  //this.htmlCode = this.domSanitizer.bypassSecurityTrustHtml(this.note.text);
  },
   error => console.log('failed note get method'));
 
-this.tagService.getTags(this.id).subscribe(result => {this.tags = result; },
-  error => {
-console.log('tag service failed ');
-  });
+// this.tagService.getTags(this.id).subscribe(result => {this.tags = result; },
+//   error => {
+// console.log('tag service failed ');
+//   });
 
     this.commentService.getComments().subscribe((commentList: Comment[]) => {this.comments = commentList; },
     error => {

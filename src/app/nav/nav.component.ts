@@ -31,7 +31,6 @@ export class NavComponent implements OnInit {
       // this.isViewable = true;
       //// this.user = new User();
 
-
       this.authService.getLoggedInPhoto.subscribe(photoUrl => this.changePhoto(photoUrl));
       this.authService.getLoggedInActive.subscribe(isactive => this.checkActivate(isactive));
       this.profileService.getChangeInPhoto.subscribe(photoUrl => this.changePhoto(photoUrl));
@@ -51,6 +50,8 @@ export class NavComponent implements OnInit {
   ngOnInit() {
     this.currentUser$ = this.authService.currentUser$;
 
+
+    this.authService.loginCheck();
 
   }
 

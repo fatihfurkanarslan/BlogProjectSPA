@@ -18,6 +18,16 @@ import { Observable } from 'rxjs';
 import { map, catchError, tap, debounceTime, skip } from 'rxjs/operators';
 import {type} from 'os';
 
+import { debounce } from 'lodash';
+
+enum saveStatus {
+
+saving = 1,
+saved = 2,
+idle = 3
+
+}
+
 @Component({
   selector: 'app-editnote',
   templateUrl: './editnote.component.html',
@@ -132,22 +142,7 @@ export class EditnoteComponent implements OnInit {
 
     this.userId = this.authService.decodedToken.nameid;
     // tslint:disable-next-line:prefer-const
-    let noteId = localStorage.getItem('editNoteId');
-
-    this.categoryService.getCategories().subscribe((categoryList: Category[]) => {this.categories = categoryList; },
-    error => {
-      console.log('category service failed');
-    });
-
-    this.noteService.getNote(+noteId).subscribe(result => {
-       this.note = result;
-      console.log("raw text in edit page" + this.note.rawText);
-      this.editorData = this.note.rawText;
-      });
-
-    this.userId = this.authService.decodedToken.nameid;
-
-    console.log(this.userId);
+    
 
     // this.noteToInsert.userId = this.userId;
     // this.noteToInsert.isDraft = true;
@@ -244,20 +239,44 @@ export class EditnoteComponent implements OnInit {
     // },
 
     onReady: () => {
-       console.log("onready worked!! ");
-       let parsedData = JSON.parse(this.editorData);
-      // console.log("parsed data : " + parsedData);
-      for (const entry of Object.entries(parsedData)) {
-        console.log("parsed data : " + entry[1]);
-        console.log("parsed data key: " + Object.values(parsedData));
-      //   if(key === 'blocks'){
-       this.editor.blocks.render({
+       
 
-      "blocks": entry[1]
+    let noteId = localStorage.getItem('editNoteId');
 
+    console.log("noteid " + noteId)
+
+    // this.categoryService.getCategories().subscribe((categoryList: Category[]) => {this.categories = categoryList; },
+    // error => {
+    //   console.log('category service failed');
+    // });
+
+    this.noteService.getNote(+noteId).subscribe(result => {
+       this.note = result;
+      console.log("raw text in edit page" + this.note.rawText);
+      this.editorData = this.note.rawText;
+
+      console.log(this.userId);
+    
+      let parsedData = JSON.parse(this.editorData);
+     // console.log("parsed data : " + parsedData);
+
+     this.editor.render(parsedData);
+    //   for (const entry of Object.entries(parsedData)) {
+    //    console.log("parsed data : " + entry[1]);
+    //    console.log("parsed data key: " + Object.values(parsedData));
+    //  //   if(key === 'blocks'){
+    //   this.editor.blocks.render({
+
+    //  "blocks": entry[1]
+
+    //  });
+    //  //   }
+    //  }
       });
-      //   }
-      }
+
+    //this.userId = this.authService.decodedToken.nameid;
+
+  
       // for (var blok in JSON.parse(this.editorData.blocks)) {
       //   console.log("inside of for loop");
       //   if (this.editorData.blocks.hasOwnProperty(blok)){
@@ -292,27 +311,49 @@ export class EditnoteComponent implements OnInit {
         // ]
        // this.editor.blocks.render(this.blocks);
 
-      }
+      },
+      
+    onChange: () => {
+     console.log("onchange e girdi")
+     this.saveEditorData();
+     this.extendedDebounceHandler();
+      
+    }
   });
 
     // this.editor.blocks.insert(this.editorData);
     // this.addBlocks();
-
-    this.detectEditorChanges().pipe(
-      debounceTime(300),
-      skip(1),
-      untilDestroyed(this)
-    ).subscribe(data=>{
-      this.editor.save().then((outputData)=>{
-        this.editorData =  JSON.stringify(outputData, null, 2);
-      });
-    });
-
   }
 
+  extendedDebounceHandler = debounce(() => {
+    // if(localStorage.getItem('noteId') == null){
+    //   console.log("if bloğunda.." + localStorage.getItem('noteId'));
+    //   this.note.userId = this.userId;
+    //   this.note.isDraft = true;
+    //   this.note.categoryId = 1;
+    //   //console.log("localstore getitem worked.." + localStorage.getItem('noteId'));
+    //   this.noteService.draftNote(this.note).subscribe(id => {
+    //     this.noteId = id;
+    //     localStorage.setItem('noteId', this.noteId);
+    //    },
+    //      error => {
+    //        console.log('note id service failed');
+    //      });
+    //     }else{
+        console.log('saving in editnote');
+        this.SaveDraft();
+    
+        // }
+  }, 3000);
 
-  JsonToHtml() {
-    let parsedData = JSON.parse(this.editorData);
+
+
+
+  saveEditorData() : void {
+    this.editor.save().then((outputData) => {
+      this.editorData =  JSON.stringify(outputData, null, 2);
+      console.log("*editordata : " + this.editorData);
+      let parsedData = JSON.parse(this.editorData);
 
     for (let i = 0; i < parsedData.blocks.length; i++) {
       let block = parsedData.blocks[i];
@@ -325,102 +366,154 @@ export class EditnoteComponent implements OnInit {
         if(block.type === 'image'){
           this.HtmlData += '<img src="' + block.data.file.url + '">';
         }
+        // console.log("HtmlData : " + this.HtmlData);
       }
-    }
+    })}
 
-    saveEditorData() : void {
-      this.editor.save().then((outputData) => {
-        this.editorData =  JSON.stringify(outputData, null, 2);
-        // for(var block of JSON.parse(this.editorData)){
-        //   this.editor.blocks.insert(block);
-        //  }
-        // console.log("detectEditorChanges in saveEditorData : " + this.editorData);
-        // this.editor.render(outputData);
-      })
-    }
+
+  // JsonToHtml() {
+  //   let parsedData = JSON.parse(this.editorData);
+
+  //   for (let i = 0; i < parsedData.blocks.length; i++) {
+  //     let block = parsedData.blocks[i];
+  //       if(block.type === 'header'){
+  //         this.HtmlData += '<header><h1>' + block.data.text + '</h1></header>';
+  //       }
+  //       if(block.type === 'paragraph'){
+  //         this.HtmlData += '<p>'+block.data.text+'</p>';
+  //       }
+  //       if(block.type === 'image'){
+  //         this.HtmlData += '<img src="' + block.data.file.url + '">';
+  //       }
+  //     }
+  //   }
+
+    // saveEditorData() : void {
+    //   this.editor.save().then((outputData) => {
+    //     this.editorData =  JSON.stringify(outputData, null, 2);
+    //     // for(var block of JSON.parse(this.editorData)){
+    //     //   this.editor.blocks.insert(block);
+    //     //  }
+    //     // console.log("detectEditorChanges in saveEditorData : " + this.editorData);
+    //     // this.editor.render(outputData);
+    //   })
+    // }
 
     ngOnDestroy(): void {
-      this.editorObserver.disconnect();
+      //this.editorObserver.disconnect();
     }
 
 
-    detectEditorChanges(): Observable <any> {
+    // detectEditorChanges(): Observable <any> {
 
-      return new Observable(observer => {
+    //   return new Observable(observer => {
 
-        const editorDom = document.querySelector('#editor-js');
-        const config = { attributes: true, childList: true, subtree: true };
+    //     const editorDom = document.querySelector('#editor-js');
+    //     const config = { attributes: true, childList: true, subtree: true };
 
-        this.editorObserver = new MutationObserver((mutation) => {
-          observer.next(mutation);
-        })
-        this.editorObserver.observe(editorDom, config);
+    //     this.editorObserver = new MutationObserver((mutation) => {
+    //       observer.next(mutation);
+    //     })
+    //     this.editorObserver.observe(editorDom, config);
 
-      })
+    //   })
+    // }
+
+
+    onSubmit() {
+
+      // tslint:disable-next-line:prefer-const
+      let noteId = localStorage.getItem('editNoteId');
+    
+  
+        const images = $('img').map(function() {
+          return $(this).attr('src').toString();
+       });
+  
+       for (let i = 0; i < images.length; i++) {
+         this.imageList.push(images[i].toString());
+       }
+  
+       //this.saveEditorData();
+  
+     // console.log(this.tagList + ' fskdfs');
+  
+      // $('img').map();
+      // this.imageList.push($('img').prop('src'));
+      // for (let i = 0; i < imgArray.length; i++) {
+      //   this.noteToInsert.photos[i] = imgArray[i];
+      //     }
+      // console.log('photooo ' + this.noteToInsert.photos[0]);
+      // this.noteToInsert.photos.push();
+      //this.noteToInsert.categoryId = this.selectedOption;
+      this.note.userId = this.userId;
+       this.note.photos = this.imageList;
+       this.note.isDraft = false;
+
+       this.note.text = this.HtmlData;
+       this.note.rawText = this.editorData;
+  
+       this.note.id = +noteId;
+  
+      //  console.log("*editordata : " + this.editorData);
+  
+      //  console.log("*parseddata : " + this.parsedData);
+     // console.log('tags : ' + this.tags);
+  
+      this.noteService.updateNote(this.note).subscribe(data => {
+        console.log('success to update note');
+      }, error => {
+        console.log('failed to update note');
+      });
+  
+      this.router.navigate(['/createtags']);
+  
     }
 
-
-  onSubmit() {
-    // this.imageList = item.attributes['img'].value;
-    // console.log(this.imageList);
-    //   const images = $('img').map(function() {
-    //     return $(this).attr('src').toString();
-    //  });
-
-    //  for (let i = 0; i < images.length; i++) {
-    //    this.imageList.push(images[i].toString());
-    //  }
-
-     this.JsonToHtml();
-
-    this.note.categoryId = this.selectedOption;
+    SaveDraft() {
+      // tslint:disable-next-line:prefer-const
+      let noteId = localStorage.getItem('editNoteId');
+  
+      //this.saveEditorData();
+  
+      const images = $('img').map(function() {
+        return $(this).attr('src').toString();
+     });
+  
+     for (let i = 0; i < images.length; i++) {
+       this.imageList.push(images[i].toString());
+     }
+  
+    
+    // $('img').map();
+    // this.imageList.push($('img').prop('src'));
+    // for (let i = 0; i < imgArray.length; i++) {
+    //   this.noteToInsert.photos[i] = imgArray[i];
+    //     }
+    // console.log('photooo ' + this.noteToInsert.photos[0]);
+    // this.noteToInsert.photos.push();
+    // this.noteToInsert.categoryId = this.selectedOption;
     this.note.userId = this.userId;
-     this.note.photos = this.imageList;
-     this.note.isDraft = false;
-     this.note.text = this.HtmlData;
-     this.note.rawText = this.editorData;
-
+    this.note.photos = this.imageList;
+    this.note.isDraft = true;
+    this.note.id = +noteId;
+    this.note.text = this.HtmlData;
+    this.note.rawText = this.editorData;
+  
+    //console.log("this.noteToInsert.rawText : " + this.editorData);
+  
+     // this.noteToInsert.tags = this.tags;
+  
+    // console.log('tags : ' + this.tags);
+  
     this.noteService.updateNote(this.note).subscribe(data => {
-      console.log('success to update note');
-      this.router.navigate(['/usernotes']);
+      //this.router.navigate(['/usernotes']);
+      //console.log('successed to update note');
+      this.openSnackBarDraft();
     }, error => {
       console.log('failed to update note');
     });
-  }
-
-  SaveDraft() {
-  //   const images = $('img').map(function() {
-  //     return $(this).attr('src').toString();
-  //  });
-
-  //  for (let i = 0; i < images.length; i++) {
-  //    this.imageList.push(images[i].toString());
-  //  }
-
-   this.JsonToHtml();
-
-
-  // $('img').map();
-  // this.imageList.push($('img').prop('src'));
-  // for (let i = 0; i < imgArray.length; i++) {
-  //   this.noteToInsert.photos[i] = imgArray[i];
-  //     }
-  // console.log('photooo ' + this.noteToInsert.photos[0]);
-  // this.noteToInsert.photos.push();
-  this.note.categoryId = this.selectedOption;
-  this.note.userId = this.userId;
-   this.note.photos = this.imageList;
-   this.note.isDraft = true;
-   this.note.text = this.HtmlData;
-     this.note.rawText = this.editorData;
-
-  this.noteService.updateNote(this.note).subscribe(data => {
-    console.log('success to insert note');
-    this.router.navigate(['/usernotes']);
-  }, error => {
-    console.log('failed to insert note');
-  });
-  }
+    }
 
   openSnackBar() {
     this._snackBar.openFromComponent(SnackbarComponent, {
@@ -429,6 +522,12 @@ export class EditnoteComponent implements OnInit {
     });
   }
 
+  openSnackBarDraft() {
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      duration: this.durationInSeconds * 1000,
+      verticalPosition: 'top'
+    });
+  }
 
 
 }

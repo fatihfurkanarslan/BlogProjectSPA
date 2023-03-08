@@ -139,6 +139,7 @@ import { CommentService } from './services/comment.service';
 import { PhotoService } from './services/photo.service';
 import { LikeService } from './services/like.service';
 import { ErrorphotobarComponent } from './errorphotobar/errorphotobar.component';
+import { ArrayFixPipe } from './array-fix.pipe';
 // import { angularEditorConfig } from '@kolkov/angular-editor/lib/config';
 
 
@@ -174,7 +175,8 @@ import { ErrorphotobarComponent } from './errorphotobar/errorphotobar.component'
       ErrorphotobarComponent,
       NotesbyuserComponent,
       CategoriesComponent,
-      CategoriesComponent
+      CategoriesComponent,
+      ArrayFixPipe
    ],
    imports: [
       BrowserModule,

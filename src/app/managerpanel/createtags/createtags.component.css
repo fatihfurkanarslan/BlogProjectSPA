@@ -11,3 +11,8 @@ button {
   margin: auto;
   display: block;
 }
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+}

@@ -4,10 +4,45 @@
 <span style="font-size: 30px"><b>{{note?.title}}</b></span>
 <br>
 <br>
-<div class="row">
+<div class="ce-block">
+  <div class="ce-block__content">
+      <ng-container [ngSwitch]="b?.type" *ngFor="let b of toBeParsedData?.blocks | arrayFix; let i = index">
+          <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center">
+              <div fxFlex="92">
+                  <!-- Paragraph -->
+                  <div *ngSwitchCase="'paragraph'" innerHTML="{{b?.data?.text}}">
+                      <div class="ce-paragraph cdx-block">
+                      </div>
+                  </div>
+
+                  <!-- Header -->
+                  <div style="height: fit-content;" *ngSwitchCase="'header'"
+                      innerHTML="{{'<h' + b?.data?.level + ' class=ce-header' + '>' + b?.data?.text + '</h' + b?.data?.level + '>'}}">
+                  </div>
+
+                  <!-- Image / Video -->
+                  <div *ngSwitchCase="'image'">
+                      <div class="cdx-block image-tool image-tool--filled" *ngIf="b?.data?.file?.url">
+                          <div class="image-tool__image">
+                              <ng-container>
+                                  <img class="image-tool__image-picture"
+                                      [src]="b?.data?.file?.url">
+                                  <div style="text-align: center; margin-top: 5px;" [innerHTML]="b?.data?.caption">
+                                  </div>
+                              </ng-container>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </ng-container>
+  </div>
+</div>
+<!-- <div class="row">
   <div class="fr-view" [innerHTML]="htmlCode"></div>
   <br>
-</div>
+</div> -->
 <div class="parent-element">
 <button mat-fab style="background-color: white" (click)="increaseLike()">
     <mat-icon style="color:#1F4E5F">favorite</mat-icon>
@@ -20,13 +55,6 @@
   </div>
 
 </div>
-
-<!-- <share-buttons class="sharebuttons" [theme]="'modern-dark'"
- [include]="['facebook','twitter','linkedin','google','pinterest','reddit','tumblr','whatsapp']"
- [show]="3"
- [url]="'http://www.google.com'"
- [autoSetMeta]="false"
-></share-buttons> -->
 
 
 
