@@ -4,6 +4,7 @@ import { CommentService } from './../../services/comment.service';
 import { AuthService } from './../../services/auth.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Note } from 'src/app/models/note';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-notecomments',
@@ -21,7 +22,7 @@ export class NotecommentsComponent implements OnInit {
     Text: new FormControl(''),
   });
 
-  constructor(private commentService: CommentService, private authService: AuthService) { }
+  constructor(private commentService: CommentService, private authService: AuthService, private httpClient: HttpClient) { }
 
 
   ngOnInit() {
@@ -31,14 +32,25 @@ export class NotecommentsComponent implements OnInit {
 
   onSubmit() {
 
-    this.model.userId = this.id;
-    this.model.noteId = this.note.id;
+    this.httpClient.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
+      this.model.IPAddress = ""+res.ip;
+      console.log("idadress : " + res.ip);
 
-    this.commentService.insertComment(this.model).subscribe(data => {
-      console.log('success to insert comment :' + data);
-    }, error => {
-      console.log('failed to insert comment :' + error);
+      this.model.userId = this.id;
+      this.model.noteId = this.note.id;
+  
+      this.commentService.insertComment(this.model).subscribe(data => {
+        this.model.text = '';
+        console.log('success to insert comment :' + data);
+  
+      }, error => {
+        console.log('failed to insert comment :' + error);
+      });
     });
+
+   
   }
+
+
 
 }

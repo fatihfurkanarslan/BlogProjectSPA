@@ -70,7 +70,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 // angular editor
 
- import {AngularEditorModule } from '@kolkov/angular-editor';
+ //import {AngularEditorModule } from '@kolkov/angular-editor';
 
 
 // ng2-fileuplouder
@@ -81,7 +81,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 
 // tinymce
 
-import { EditorModule } from '@tinymce/tinymce-angular';
+//import { EditorModule } from '@tinymce/tinymce-angular';
 
 // resolvers
 import { HomeNotes } from './resolvers/homenotes';
@@ -188,7 +188,7 @@ import { ArrayFixPipe } from './array-fix.pipe';
       RouterModule.forRoot(Routes),
       // AngularFontAwesomeModule,
       FileUploadModule,
-      AngularEditorModule,
+      //AngularEditorModule,
       // FroalaEditorModule.forRoot(),
       // FroalaViewModule.forRoot(),
       InfiniteScrollModule,
@@ -219,7 +219,6 @@ import { ArrayFixPipe } from './array-fix.pipe';
       }),
       MDBBootstrapModule.forRoot(),
       FlexLayoutModule,
-      EditorModule,
       ShareIconsModule,
       FontAwesomeModule
 

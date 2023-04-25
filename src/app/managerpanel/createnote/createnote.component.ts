@@ -23,6 +23,7 @@ import { type } from 'os';
 import { untilDestroyed } from '@ngneat/until-destroy';
 
 import { debounce } from 'lodash';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -56,7 +57,7 @@ export class CreatenoteComponent implements OnInit, OnDestroy {
 
 
   constructor(private noteService: NoteService, private authService: AuthService,
-      private _snackBar: MatSnackBar, private router: Router) {
+      private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router) {
     
        }
 
@@ -182,6 +183,11 @@ export class CreatenoteComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.userId = this.authService.decodedToken.nameid;
+
+    this.httpClient.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
+      this.noteToInsert.IPAddress = ""+res.ip;
+      console.log("idadress : " + this.noteToInsert.IPAddress);
+    });
 
     this.editor = new EditorJS({
 
@@ -389,6 +395,7 @@ export class CreatenoteComponent implements OnInit, OnDestroy {
     let noteId = localStorage.getItem('noteId');
   
 
+
       const images = $('img').map(function() {
         return $(this).attr('src').toString();
      });
@@ -451,6 +458,14 @@ export class CreatenoteComponent implements OnInit, OnDestroy {
     this._snackBar.openFromComponent(SnackbarComponent, {
       duration: this.durationInSeconds * 1000,
       verticalPosition: 'top'
+    });
+  }
+
+  getIPAddress()
+  {
+    this.httpClient.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
+      this.noteToInsert.IPAddress = res.ip;
+      console.log("idadress : " + this.noteToInsert.IPAddress);
     });
   }
 

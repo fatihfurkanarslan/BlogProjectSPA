@@ -19,6 +19,7 @@ import { map, catchError, tap, debounceTime, skip } from 'rxjs/operators';
 import {type} from 'os';
 
 import { debounce } from 'lodash';
+import { HttpClient } from '@angular/common/http';
 
 enum saveStatus {
 
@@ -55,7 +56,7 @@ export class EditnoteComponent implements OnInit {
   note: Note;
 
   constructor(private noteService: NoteService, private categoryService: CategoryService,
-     private authService: AuthService,  private _snackBar: MatSnackBar, private router: Router) {
+     private authService: AuthService,  private _snackBar: MatSnackBar, private router: Router,  private httpClient: HttpClient) {
        this.note = new Note();
       }
 
@@ -143,7 +144,10 @@ export class EditnoteComponent implements OnInit {
     this.userId = this.authService.decodedToken.nameid;
     // tslint:disable-next-line:prefer-const
     
-
+    this.httpClient.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
+      this.note.IPAddress = ""+res.ip;
+      console.log("idadress : " + this.note.IPAddress);
+    });
     // this.noteToInsert.userId = this.userId;
     // this.noteToInsert.isDraft = true;
 
@@ -425,6 +429,7 @@ export class EditnoteComponent implements OnInit {
       // tslint:disable-next-line:prefer-const
       let noteId = localStorage.getItem('editNoteId');
     
+     
   
         const images = $('img').map(function() {
           return $(this).attr('src').toString();
@@ -527,6 +532,11 @@ export class EditnoteComponent implements OnInit {
       duration: this.durationInSeconds * 1000,
       verticalPosition: 'top'
     });
+  }
+
+  getIPAddress()
+  {
+   
   }
 
 

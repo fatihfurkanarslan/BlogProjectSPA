@@ -16,6 +16,7 @@ export class Note {
   userId: string;
   isDraft: boolean;
   mainPhotourl: string;
+  IPAddress:string;
   photos: string[];
   comments: Comment[];
   tags: string[];

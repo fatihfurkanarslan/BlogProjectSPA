@@ -12,6 +12,7 @@ import { ProfileService } from './../../services/profile.service';
 import { TagToInsert } from './../../models/tagToInsert';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/category';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-createtags',
@@ -24,6 +25,7 @@ export class CreatetagsComponent implements OnInit {
   selectedOption: any = {};
   tagList: string[] = [];
   noteId: any;
+  ipAddress: string;
 
   tag: TagToInsert = new TagToInsert();
 
@@ -34,7 +36,7 @@ export class CreatetagsComponent implements OnInit {
   note: Note;
 
   constructor(private tagService: TagService, private router: Router,
-     private _snackBar: MatSnackBar, private noteService: NoteService, private profileService: ProfileService, private categoryService: CategoryService) {
+     private _snackBar: MatSnackBar, private noteService: NoteService, private httpClient: HttpClient, private categoryService: CategoryService) {
 
        this.note = new Note();
        //profileService.getChangeInPhoto.subscribe(photoUrl => this.changePhoto(photoUrl));
@@ -47,7 +49,9 @@ export class CreatetagsComponent implements OnInit {
     }
   ngOnInit() {
         // tslint:disable-next-line:prefer-const
-   
+   this.getIPAddress();
+
+
 
     this.categoryService.getCategories().subscribe((categoryList: Category[]) => {this.categories = categoryList; },
     error => {
@@ -123,6 +127,22 @@ export class CreatetagsComponent implements OnInit {
       duration: this.durationInSeconds * 1000,
       verticalPosition: 'top'
     });
+  }
+
+  getIPAddress()
+  {
+    this.httpClient.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
+      this.ipAddress = res.ip;
+      console.log("idadress : " + this.ipAddress);
+    });
+  //   this.httpClient
+  //            .get('http://api.ipify.org/?format=jsonp&callback=JSONP_CALLBACK')
+  //            .subscribe((res: Response) => {
+  //              console.log('res ', res);
+  //              console.log('res.json() ', res.text());
+  //              console.log('parseado  stringify ', JSON.stringify(res.text()));
+  //            }
+  // );
   }
 
 }

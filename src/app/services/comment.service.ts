@@ -8,9 +8,18 @@ import { map } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
+    'Cache-Control': 'no-cache',
+    'Pragma': 'no-cache',
+    'Expires': 'Sat, 01 Jan 2000 00:00:00 GMT',
     'Authorization': 'Bearer ' + localStorage.getItem('token')
-  }).set('content', 'application/json')
+  })
 };
+
+// const httpOptions = {
+//   headers: new HttpHeaders({
+//     'Authorization': 'Bearer ' + localStorage.getItem('token')
+//   }).set('content', 'application/json')
+// };
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +31,8 @@ export class CommentService {
 
 constructor(private http: HttpClient) { }
 
-getComments(): Observable<Comment[]> {
-  return this.http.get<Comment[]>(this.apiUrl + 'getcomments', httpOptions);
+getComments(noteId: number): Observable<Comment[]> {
+  return this.http.get<Comment[]>(this.apiUrl + 'getcomments/' + noteId, httpOptions);
 }
 
 getComment(commentId: number): Observable<Comment> {

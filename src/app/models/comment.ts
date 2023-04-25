@@ -3,4 +3,5 @@ export class Comment {
   text: string;
   onCreated: string;
   onModifiedUsername: string;
+  IPAddress: string;
 }
