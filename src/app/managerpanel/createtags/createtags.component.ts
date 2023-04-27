@@ -49,8 +49,6 @@ export class CreatetagsComponent implements OnInit {
     }
   ngOnInit() {
         // tslint:disable-next-line:prefer-const
-   this.getIPAddress();
-
 
 
     this.categoryService.getCategories().subscribe((categoryList: Category[]) => {this.categories = categoryList; },
@@ -127,22 +125,6 @@ export class CreatetagsComponent implements OnInit {
       duration: this.durationInSeconds * 1000,
       verticalPosition: 'top'
     });
-  }
-
-  getIPAddress()
-  {
-    this.httpClient.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
-      this.ipAddress = res.ip;
-      console.log("idadress : " + this.ipAddress);
-    });
-  //   this.httpClient
-  //            .get('http://api.ipify.org/?format=jsonp&callback=JSONP_CALLBACK')
-  //            .subscribe((res: Response) => {
-  //              console.log('res ', res);
-  //              console.log('res.json() ', res.text());
-  //              console.log('parseado  stringify ', JSON.stringify(res.text()));
-  //            }
-  // );
   }
 
 }

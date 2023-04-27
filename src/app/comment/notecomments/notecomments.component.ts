@@ -34,21 +34,19 @@ export class NotecommentsComponent implements OnInit {
 
     this.httpClient.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
       this.model.IPAddress = ""+res.ip;
-      console.log("idadress : " + res.ip);
-
-      this.model.userId = this.id;
-      this.model.noteId = this.note.id;
-  
-      this.commentService.insertComment(this.model).subscribe(data => {
-        this.model.text = '';
-        console.log('success to insert comment :' + data);
-  
-      }, error => {
-        console.log('failed to insert comment :' + error);
-      });
+      console.log("idadress : " + this.model.IPAddress);
     });
 
-   
+    this.model.userId = this.id;
+    this.model.noteId = this.note.id;
+
+    this.commentService.insertComment(this.model).subscribe(data => {
+      this.model.text = '';
+      console.log('success to insert comment :' + data);
+
+    }, error => {
+      console.log('failed to insert comment :' + error);
+    });
   }
 
 

@@ -101,14 +101,14 @@ import { Routes } from './routes';
 
 // import { ShareButtonsModule } from '@ngx-share/buttons';
 // 2022 version
-import { ShareButtonsModule  } from 'ngx-sharebuttons/buttons';
-import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+// import { ShareButtonsModule  } from 'ngx-sharebuttons/buttons';
+// import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 
 // md bootstrap
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
-// flex-layout
-import { FlexLayoutModule } from '@angular/flex-layout';
+// // flex-layout
+// import { FlexLayoutModule } from '@angular/flex-layout';
 
 // fontawsome
 
@@ -214,11 +214,7 @@ import { ArrayFixPipe } from './array-fix.pipe';
       MatChipsModule,
       MatAutocompleteModule,
       TagInputModule,
-      ShareButtonsModule.withConfig({
-           debug : true
-      }),
       MDBBootstrapModule.forRoot(),
-      FlexLayoutModule,
       ShareIconsModule,
       FontAwesomeModule
 

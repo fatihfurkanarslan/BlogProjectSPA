@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from './../../snackbar/snackbar.component';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+//import { AngularEditorConfig } from '@kolkov/angular-editor';
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import ImageTool from '@editorjs/image';
@@ -159,6 +159,8 @@ export class EditnoteComponent implements OnInit {
           class: Header,
           inlineToolbar: ['link']
         },
+        // code: CodeTool
+        // ,
         image: {
           class: ImageTool,
           config: {
