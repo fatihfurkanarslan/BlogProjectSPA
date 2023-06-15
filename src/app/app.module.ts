@@ -23,6 +23,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatCardTitle } from '@angular/material/card';
 
 
 // import {MatSelect} from '@angular/material/select';
@@ -215,9 +216,7 @@ import { ArrayFixPipe } from './array-fix.pipe';
       MatAutocompleteModule,
       TagInputModule,
       MDBBootstrapModule.forRoot(),
-      ShareIconsModule,
       FontAwesomeModule
-
    ],
    providers: [
       AuthService,

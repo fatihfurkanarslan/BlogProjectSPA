@@ -1,0 +1,1 @@
+{"ast":null,"code":"import _defineProperty from \"C:/Users/Fatih Furkan Arslan/Desktop/Github/BlogProject-SPA/node_modules/@babel/runtime/helpers/esm/defineProperty.js\";\nexport class Tagmodel {\n  constructor() {\n    _defineProperty(this, \"tagParam\", void 0);\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
