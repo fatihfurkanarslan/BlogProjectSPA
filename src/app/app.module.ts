@@ -60,6 +60,7 @@ import { NotesbyuserComponent } from './notes/notesbyuser/notesbyuser.component'
 import { CategoriesComponent } from './categories/categories.component';
 
 
+
 // hammerjs
 
 import 'hammerjs';

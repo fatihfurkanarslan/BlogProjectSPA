@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
+import { MatCardTitle } from '@angular/material/card';
+import { MatCardHeader } from '@angular/material/card';
 
 @Component({
   selector: 'app-activateuser',
